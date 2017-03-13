@@ -1,0 +1,23 @@
+﻿<div id="loginArea">
+    <form method="post" id="loginForm">
+        <!-- These inputs are required by the presentation framework. Do not modify or remove -->
+        <input id="authMethod" type="hidden" name="AuthMethod" value="%AuthMethod%" />
+        <input id="context" type="hidden" name="Context" value="%Context%" />
+        <!-- End inputs are required by the presentation framework. -->
+        <p id="pageIntroductionText" style="color:red">#ERROR#</p>
+        <label for="otpvalue" class="block">#MESSAGE#</label>
+        <input id="otpvalue" name="otpvalue" type="text" value="" class="text" placeholder="OTP Password" size="30"/>
+        <div id="submissionArea" class="submitMargin">
+            <input id="submitButton" type="submit" name="Submit" value="Submit"/>
+        </div>
+    </form>
+    <div id="intro" class="groupMargin">
+       
+    </div>
+    <!--<script type="text/javascript" language="JavaScript">
+     //<![CDATA[
+     function AuthPage() { }
+     AuthPage.submitAnswer = function () { return true; };
+     //]]>
+    </script>-->
+</div>
