@@ -8,7 +8,7 @@
   <ssl>false</ssl>
   <!-- define a admin user for the privacyIDEA -->
   <adminuser>Administrator</adminuser>
-  <adminpw>4Kessel2use++</adminpw>
+  <adminpw></adminpw>
 
   <!-- UI text for the websites (no localization for now) -->
   <interface>

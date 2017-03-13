@@ -69,10 +69,9 @@
   <ItemGroup>
     <Content Include="AuthError.html" />
     <Content Include="AuthPage.html" />
-    <Content Include="config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="config.xml">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Install\Install-ADFSProvider.ps1" />

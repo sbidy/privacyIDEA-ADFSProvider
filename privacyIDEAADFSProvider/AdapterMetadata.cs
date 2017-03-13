@@ -9,7 +9,7 @@ namespace privacyIDEAADFSProvider
         //Returns the name of the provider that will be shown in the AD FS management UI (not visible to end users)
         public string AdminName
         {
-            get { return "privacyIDEA_ADFS_provider"; }
+            get { return "privacyIDEA_ADFSProvider"; }
         }
 
         //Returns an array of strings containing URIs indicating the set of authentication methods implemented by the adapter 
