@@ -2,7 +2,9 @@
 I need some code review and help to make this provider better! If you find some bugs or the code is "creepy" -> feel free to contribute :)
 
 To contribute, please fork this repository and make pull requests to the master branch.
+
 *The repo optimized for Visual Studio*
+
 ## Abstract
 A Microsoft Active Directory Federation Service (ADFS) provider for the open source authentication system privacyIDEA.
 
@@ -24,7 +26,7 @@ This ADFSProvider gives you nearly the same capabilities as the cloud based Azur
 - Don’t require a reboot (on install and uninstall)
 
 ## Installation / usage
-To install the provider you have to download the pre-compiled binary (klick on "releases"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA_ADFSPovider at the pre-authentication options in the ADFS settings menu.
+To install the provider you have to download the pre-compiled binary (click on "releases"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA_ADFSPovider at the pre-authentication options in the ADFS settings menu.
 
 ### Step-by-step
 1. Download the zip from releases or compile the binaries by your own
@@ -50,6 +52,7 @@ More info see the Microsoft documentation.
 - Advanced documentation
 - Code review
 - Security review
+- Some paperwork and references
 ...
 
 ## Authors
