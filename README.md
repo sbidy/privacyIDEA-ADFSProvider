@@ -18,6 +18,7 @@ This ADFSProvider gives you nearly the same capabilities as the cloud based Azur
 
 ## Features
 - Works with ADFSv3 (Windows Server 2012 R2)
+- Office365
 - Easy to implement
 - Trigger automatically a challenge (mail, SMS) on logon
 - Seamless integration into the ADFS interface
@@ -44,12 +45,11 @@ To install the provider you have to download the pre-compiled binary (click on "
 If you plan to use a on-prem ADFS to authenticate your Office 365 user, you can also use this provider.
 Install a ADFS on-prem; implement these provider and configure your Office 365 tenant with the federation mode.
 
+![alt tag](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/blob/master/drawing.png))
+
 More info see the Microsoft documentation.
 
 ## TBD
-
-- Update the json parsing
-- Advanced documentation
 - Code review
 - Security review
 - Some paperwork and references
