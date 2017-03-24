@@ -45,7 +45,7 @@ To install the provider you have to download the pre-compiled binary (click on "
 If you plan to use a on-prem ADFS to authenticate your Office 365 user, you can also use this provider.
 Install a ADFS on-prem; implement these provider and configure your Office 365 tenant with the federation mode.
 
-![alt tag](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/blob/master/drawing.png))
+![Schema](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/drawing.png)
 
 More info see the Microsoft documentation.
 
