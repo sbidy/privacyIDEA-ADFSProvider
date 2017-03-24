@@ -8,10 +8,10 @@ To contribute, please fork this repository and make pull requests to the master 
 ## Abstract
 A Microsoft Active Directory Federation Service (ADFS) provider for the open source authentication system [privacyIDEA](https://www.privacyidea.org/).
 
-In some it-compliance or best practice papers, it is highly recommend adding a second factor ontop of username and password combination to increase the security level.
+In some it-compliance or best practice papers, it is highly recommend adding a second factor on top of the username and password combination to increase the security level.
 The implementation of this type of advanced authentication can challenging the it-infrastructure and administrators.
 This open source project provides an easy way to connect the authentication components and the on-premises open source privacyIDEA.
-You don't need an additional RADIUS-Server or other components to connect these systems. Only this provider hast to be registered at the ADFS.
+You don't need an additional RADIUS-Server or other components to connect these systems. Only this provider has to be registered at the ADFS.
 After that, you can use the TOTP, HOTP, SMS or E-Mail authentication method to authenticate the user for products like Microsoft Exchange, Microsoft Dynamics, Office 365 or ohter services.
 
 This ADFSProvider gives you nearly the same capabilities as a cloud based authentication service. However, this provider and the on-prem privacyIDEA authentication system is open source and free. 
