@@ -59,7 +59,7 @@ More info see the Microsoft documentation.
 Stephan Traub - Sbidy -> https://github.com/sbidy
 
 ## Credits
-Thanks to Cornelius form privacyIDEA -> https://www.privacyidea.org/
+Thanks to Cornelius from privacyIDEA -> https://www.privacyidea.org/
 
 ## License
 The MIT License (MIT)
