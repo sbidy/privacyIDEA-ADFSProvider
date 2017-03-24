@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
+using System.Runtime.Serialization.Json;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace privacyIDEAADFSProvider
 {
@@ -21,7 +22,6 @@ namespace privacyIDEAADFSProvider
         public OTPprovider(string privacyIDEAurl)
         {
             URL = privacyIDEAurl;
-            ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
         }
         /// <summary>
         /// Validates a otp pin to the PID3
@@ -40,7 +40,6 @@ namespace privacyIDEAADFSProvider
 
                 using (WebClient client = new WebClient())
                 {
-
                     byte[] response =
                     client.UploadValues(URL + "/validate/check", new NameValueCollection()
                     {
@@ -48,11 +47,10 @@ namespace privacyIDEAADFSProvider
                         {"user", OTPuser},
                         {"realm", realm}
                     });
-
                     responseString = Encoding.UTF8.GetString(response);
                 }
                 Debug.WriteLine("Response: " + responseString);
-                return CheckOTPValue(responseString);
+                return (getJsonNode(responseString, "status") == "true" && getJsonNode(responseString, "value") == "true");
             }
             catch (WebException wex)
             {
@@ -88,45 +86,6 @@ namespace privacyIDEAADFSProvider
 
         }
         /// <summary>
-        /// Checks the the json for the otp status
-        /// </summary>
-        /// <param name="jsonResponse">json sting</param>
-        /// <returns>true if the pin is correct</returns>
-        private bool CheckOTPValue(string jsonResponse)
-        {
-            // nomalize string
-            Regex regex = new Regex(@"{""status""(.*?)\}");
-
-            Match match = regex.Match(jsonResponse);
-            if (match.Success)
-            {
-                // get data form json response
-                var settings = match.Value.Trim('{', '}')
-                     .Replace("\"", "")
-                     .Replace(" ", "")
-                     .Split(',')
-                     .Select(s => s.Trim().Split(':'))
-                     .ToDictionary(a => a[0], a => a[1]);
-                Debug.WriteLine("Match: " + match.Value);
-                if ((settings["status"] == "true") && (settings["value"] == "true")) return true;
-            }
-            return false;
-        }
-        /// <summary>
-        /// Validates the pin for a numeric only string
-        /// </summary>
-        /// <param name="str">string to validate</param>
-        /// <returns>Ture if string only contains numbers</returns>
-        private bool IsDigitsOnly(string str)
-        {
-            foreach (char c in str)
-            {
-                if (c < '0' || c > '9')
-                    return false;
-            }
-            return true;
-        }
-        /// <summary>
         /// Requests a admin token for administrative tasks
         /// </summary>
         /// <param name="admin_user">Admin user name</param>
@@ -147,7 +106,7 @@ namespace privacyIDEAADFSProvider
                     });
                     responseString = Encoding.UTF8.GetString(response);
                 }
-                return ExtractAuthToken(responseString);
+                return getJsonNode(responseString, "token");
             }
             catch (WebException wex)
             {
@@ -155,33 +114,6 @@ namespace privacyIDEAADFSProvider
                 return "";
             }
 
-        }
-        /// <summary>
-        /// Extracts the token string from the json
-        /// </summary>
-        /// <param name="jsonResponse">json string</param>
-        /// <returns>The admin token</returns>
-        private string ExtractAuthToken(string jsonResponse)
-        {
-            // nomalize string
-            Regex regex = new Regex(@"""token"": "".*?\"",");
-
-            Match match = regex.Match(jsonResponse);
-            if (match.Success)
-            {
-                // get data form json response
-                var settings = match.Value.Trim(',')
-                     .Replace("\"", "")
-                     .Replace(" ", "")
-                     .Split(',')
-                     .Select(s => s.Trim().Split(':'))
-                     .ToDictionary(a => a[0], a => a[1]);
-                Debug.WriteLine("MatchToken: " + match.Value);
-
-                if (!string.IsNullOrEmpty(settings["token"])) return settings["token"];
-                else return null;
-            }
-            return null;
         }
         /// <summary>
         /// Enrolls a new token to the specified user
@@ -239,7 +171,7 @@ namespace privacyIDEAADFSProvider
                     });
                     responseString = Encoding.UTF8.GetString(response);
                 }
-                return CheckOTPValue(responseString);
+                return (getJsonNode(responseString, "status") == "true" && getJsonNode(responseString, "value") == "true");
             }
             catch (WebException wex)
             {
@@ -254,22 +186,45 @@ namespace privacyIDEAADFSProvider
         /// <returns></returns>
         private Dictionary<string, string> getQRimage(string jsonResponse)
         {
-            // nomalize string
-            Regex regex = new Regex(@"\""img"": "".*?\""");
             Dictionary<string, string> imgs = new Dictionary<string, string>();
+            var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(Encoding.ASCII.GetBytes(jsonResponse), new XmlDictionaryReaderQuotas()));
             int counter = 0;
-            Match match = regex.Match(jsonResponse);
-            if (match.Success)
+            foreach (XElement element in xml.Descendants("img"))
             {
-                foreach (Match m in regex.Matches(jsonResponse))
-                {
-                    // get data form json response
-                    var settings = match.Value.Replace(" ", "").Replace("\":\"", "\"-");
-                    Debug.WriteLine("MatchToken: " + match.Value);
-                    imgs.Add(settings.Split('-')[0].Replace("\"", "") + counter++, settings.Split('-')[1].Replace("\"", ""));
-                }
+                imgs.Add(counter++.ToString(), element.Value);
             }
             return imgs;
+        }
+
+        /////////////////////////////////////////////////////////////////
+        // ------- HELPER ------ 
+        /////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Validates the pin for a numeric only string
+        /// </summary>
+        /// <param name="str">string to validate</param>
+        /// <returns>True if string only contains numbers</returns>
+        private bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            if (str.Length > 8) return false;
+
+            return true;
+        }
+        /// <summary>
+        /// Get json information form a defined node
+        /// </summary>
+        /// <param name="jsonResponse">json string</param>
+        /// <param name="nodename">node name of the json field</param>
+        /// <returns>returns the value (inner text) from the defined node</returns>
+        private string getJsonNode(string jsonResponse, string nodename)
+        {
+            var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(Encoding.ASCII.GetBytes(jsonResponse), new XmlDictionaryReaderQuotas()));
+            return xml.Descendants(nodename).Single().Value;
         }
     }
     public class WrongOTPExeption : Exception

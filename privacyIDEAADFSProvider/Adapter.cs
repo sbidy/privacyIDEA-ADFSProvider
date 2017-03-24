@@ -11,6 +11,8 @@ namespace privacyIDEAADFSProvider
 {
     public class Adapter : IAuthenticationAdapter
     {
+
+        // TODO: Create a property class
         private string privacyIDEAurl;
         private string privacyIDEArealm;
         private string username;
@@ -140,7 +142,7 @@ namespace privacyIDEAADFSProvider
             }
             else
             {
-                //authentication not complete - return new instance of IAdapterPresentationForm derived class
+                //authentication not complete - return new instance of IAdapterPresentationForm derived class and the generic error message
                 return new AdapterPresentationForm(true, erromessage);
             }
         }

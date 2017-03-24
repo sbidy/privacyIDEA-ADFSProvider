@@ -40,7 +40,7 @@ To install the provider you have to download the pre-compiled binary (click on "
 8. Mark the checkbox
 9. Now you should see an OTP textbox after the normal username/password form
 
-## Office 365 or Exchange on-prem
+## Office 365
 If you plan to use a on-prem ADFS to authenticate your Office 365 user, you can also use this provider.
 Install a ADFS on-prem; implement these provider and configure your Office 365 tenant with the federation mode.
 

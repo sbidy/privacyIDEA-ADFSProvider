@@ -83,8 +83,8 @@ namespace privacyIDEAADFSProvider {
         ///        &lt;input id=&quot;authMethod&quot; type=&quot;hidden&quot; name=&quot;AuthMethod&quot; value=&quot;%AuthMethod%&quot; /&gt;
         ///        &lt;input id=&quot;context&quot; type=&quot;hidden&quot; name=&quot;Context&quot; value=&quot;%Context%&quot; /&gt;
         ///        &lt;!-- End inputs are required by the presentation framework. --&gt;
-        ///        &lt;p id=&quot;pageIntroductionText&quot;&gt;&lt;/p&gt;
-        ///        &lt;label for=&quot;otpvalue&quot; class=&quot;block&quot;&gt;One-Time-Password&lt;/labe [rest of string was truncated]&quot;;.
+        ///        &lt;p id=&quot;pageIntroductionText&quot; style=&quot;color:red&quot;&gt;#ERROR#&lt;/p&gt;
+        ///        &lt;label for=&quot;otpvalue&quot; class=&quot;block [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AuthPage {
             get {

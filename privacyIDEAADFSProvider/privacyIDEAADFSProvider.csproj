@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>privacyIDEAADFSProvider</RootNamespace>
-    <AssemblyName>privacyIDEAADFSProvider</AssemblyName>
+    <AssemblyName>privacyIDEA-ADFSProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Install\Install-ADFSProvider.ps1" />
+    <None Include="Install\Remove-ADFSProvider.ps1" />
     <None Include="privacyIDEAProvider.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
