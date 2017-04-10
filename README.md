@@ -8,7 +8,7 @@ You don't need an additional RADIUS-Server or other components to connect these 
 After that, you can use the TOTP, HOTP, SMS or E-Mail authentication method to authenticate the user for products like Microsoft Exchange, Microsoft Dynamics, Office 365 or ohter services.
 
 This ADFSProvider gives you nearly the same capabilities as a cloud based authentication service. However, this provider and the on-prem privacyIDEA authentication system is open source and free. 
-# Give a :star: :metal:
+## Give a :star: :metal:
 
 ## Contributing
 I need some code review and help to make this provider better! If you find some bugs or the code is "creepy" -> feel free to contribute :)
