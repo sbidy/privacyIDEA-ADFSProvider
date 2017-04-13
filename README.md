@@ -10,6 +10,9 @@ After that, you can use the TOTP, HOTP, SMS or E-Mail authentication method to a
 This ADFSProvider gives you nearly the same capabilities as a cloud based authentication service. However, this provider and the on-prem privacyIDEA authentication system is open source and free. 
 ## Give a :star: :metal:
 
+## Need help? 
+If you have any further questions or you need help for a enterprise implementation please don't hesitate to contact me at st[äd]audius.de !
+
 ## Contributing
 I need some code review and help to make this provider better! If you find some bugs or the code is "creepy" -> feel free to contribute :)
 
