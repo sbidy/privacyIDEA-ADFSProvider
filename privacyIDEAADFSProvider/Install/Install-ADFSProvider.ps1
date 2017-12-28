@@ -1,9 +1,35 @@
-﻿# Install the provider
+# Install the provider
 
-Set-location "C:\Program and Files\privacyIDEAProvider\"
-[System.Reflection.Assembly]::Load("System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")
-$publish = New-Object System.EnterpriseServices.Internal.Publish
-$publish.GacInstall("C:\Program and Files\privacyIDEAProvider\privacyIDEA-ADFSProvider.dll")
+function Gac-Util
+{
+    param (
+        [parameter(Mandatory = $true)][string] $assembly
+    )
+    try
+    {
+        $Error.Clear()
 
-$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEAADFSProvider, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b6483f285cb7b6eb"
-Register-AdfsAuthenticationProvider -TypeName $typeName -Name "privacyIDEA-ADFSProvider" -ConfigurationFilePath "C:\Program and Files\privacyIDEAProvider\config.xml" -Verbose
+        [Reflection.Assembly]::LoadWithPartialName("System.EnterpriseServices") | Out-Null
+        [System.EnterpriseServices.Internal.Publish] $publish = New-Object System.EnterpriseServices.Internal.Publish
+
+        if (!(Test-Path $assembly -type Leaf) ) 
+            { throw "The assembly $assembly does not exist" }
+
+        if ([System.Reflection.Assembly]::LoadFile($assembly).GetName().GetPublicKey().Length -eq 0 ) 
+            { throw "The assembly $assembly must be strongly signed" }
+
+        $publish.GacInstall($assembly)
+
+        Write-Host "`t`t$($MyInvocation.InvocationName): Assembly $assembly gacced"
+    }
+    catch
+    {
+        Write-Host "`t`t$($MyInvocation.InvocationName): $_"
+    }
+}
+
+Set-location "C:\Program Files\privacyIDEA-ADFSProvider"
+Gac-Util "C:\Program Files\privacyIDEA-ADFSProvider\privacyIDEA-ADFSProvider.dll"
+
+$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b6483f285cb7b6eb"
+Register-AdfsAuthenticationProvider -TypeName $typeName -Name "privacyIDEA-ADFSProvider" -ConfigurationFilePath "C:\Program Files\privacyIDEA-ADFSProvider\config.xml" -Verbose
