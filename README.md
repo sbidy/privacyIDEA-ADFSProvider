@@ -8,7 +8,6 @@ You don't need an additional RADIUS-Server or other components to connect these 
 After that, you can use the TOTP, HOTP, SMS or E-Mail authentication method to authenticate the user for products like Microsoft Exchange, Microsoft Dynamics, Office 365 or ohter services.
 
 This ADFSProvider gives you nearly the same capabilities as a cloud based authentication service. However, this provider and the on-prem privacyIDEA authentication system is open source and free. 
-## Give a :star: :metal:
 
 ## Need help? 
 If you have any further questions or you need help for a enterprise implementation please don't hesitate to contact me at st[äd]audius.de !
@@ -35,15 +34,19 @@ To install the provider you have to download the pre-compiled binary (click on "
 
 ### Step-by-step
 1. Download the zip from releases or compile the binaries by your own
-2. Create a folder at the ADFS under "C:\Program and Files\privacyIDEAProvider\"
+2. Create a folder at the ADFS under "C:\Program Files\privacyIDEAProvider\"
 3. Extract the zip and copy all files to this folder at the ADFS server
-4. Open the PowerShell script and check the "StartPath" variable - this should be "C:\Program and Files\privacyIDEAProvider\"
-5. Open the config.xml file and update the information in it
+5. Open the PowerShell script and check the "StartPath" variable - this should be "C:\Program Files\privacyIDEAProvider\"
+6. Open the config.xml file and update the information in it
 !!! The privacyIDEA user should have permissions to authenticate users !!!
-6. Run the PowerShell with administrator privileges
-7. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEAADFSProvider
-8. Mark the checkbox
-9. Now you should see an OTP textbox after the normal username/password form
+7. Run the PowerShell with administrator privileges
+8. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEA_ADFSProvider
+9. Mark the checkbox
+10. Now you should see an OTP textbox after the normal username/password form
+
+Test: https://fqdn.domain.com/adfs/ls/IdpInitiatedSignon.aspx (change the FQDN)
+
+Check the EventLog (Custom Views -> Server Rols -> Active Directory Federation Services) for errors!
 
 ## Office 365
 If you plan to use a on-prem ADFS to authenticate your Office 365 user, you can also use this provider.
