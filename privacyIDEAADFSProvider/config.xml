@@ -6,8 +6,12 @@
   <realm>adfs</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
   <ssl>false</ssl>
-  <!-- define a admin user for the privacyIDEA -->
-  <adminuser>Administrator</adminuser>
+  <!-- 
+      Provide a administrative user and password for the API.
+      Only needed if a challenge must be triggered (e.g. Email or SMS token)!
+      If not -> left blank.
+  -->
+  <adminuser></adminuser>
   <adminpw></adminpw>
 
   <!-- UI text for the websites (no localization for now) -->
