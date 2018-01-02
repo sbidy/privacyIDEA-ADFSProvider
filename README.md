@@ -56,6 +56,20 @@ Install a ADFS on-prem; implement these provider and configure your Office 365 t
 
 More info see the Microsoft documentation.
 
+## Debug
+To debug the adapter you have to install the "DebugView" tool from Microsoft [Download](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview).
+Configure the DebugView to capture global win32 events:
+
+![Debug config](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/Debug_Cap.PNG)
+
+Some debug and error information are logged to the debug channel:
+
+![Debug_view](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/Debug_Cap2.PNG)
+
+The entries have a prefix.
+
+Please look also to the EventLog! `Custom Views -> Server Rols -> Active Directory Federation Services`
+
 ## TBD
 - Code review
 - Security review
