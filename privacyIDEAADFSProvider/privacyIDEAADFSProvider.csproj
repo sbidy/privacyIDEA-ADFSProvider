@@ -37,7 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.IdentityServer.Web">
-      <HintPath>..\Microsoft.IdentityServer.Web.dll</HintPath>
+      <HintPath>.\Microsoft.IdentityServer.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
