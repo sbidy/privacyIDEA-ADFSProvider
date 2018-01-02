@@ -6,10 +6,11 @@ namespace privacyIDEAADFSProvider
 {
     class AdapterMetadata : IAuthenticationAdapterMetadata
     {
+        public string adapterversion { get; set; }
         //Returns the name of the provider that will be shown in the AD FS management UI (not visible to end users)
         public string AdminName
         {
-            get { return "privacyIDEA_ADFSProvider"; }
+            get { return "privacyIDEA-ADFSProvider_"+adapterversion; }
         }
 
         //Returns an array of strings containing URIs indicating the set of authentication methods implemented by the adapter 
