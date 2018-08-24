@@ -30,7 +30,7 @@ To contribute, please fork this repository and make pull requests to the master 
 - Don’t require a reboot (on install and uninstall)
 
 ## Installation / usage
-To install the provider you have to download the pre-compiled binary (click on "releases"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
+To install the provider you have to download the pre-compiled binary (click on "[releases](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/)"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
 
 ### Step-by-step
 1. Download the zip from releases or compile the binaries by your own
@@ -55,12 +55,6 @@ Install a ADFS on-prem; implement these provider and configure your Office 365 t
 ![Schema](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/drawing.png)
 
 More info see the Microsoft documentation.
-
-## TBD
-- Code review
-- Security review
-- Some paperwork and references
-...
 
 ## Authors
 Stephan Traub - Sbidy -> https://github.com/sbidy
