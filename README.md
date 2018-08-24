@@ -38,7 +38,6 @@ To install the provider you have to download the pre-compiled binary (click on "
 3. Extract the zip and copy all files to this folder at the ADFS server
 5. Open the PowerShell script and check the "StartPath" variable - this should be "C:\Program Files\privacyIDEAProvider\"
 6. Open the config.xml file and update the information in it
-!!! The privacyIDEA user should have permissions to authenticate users !!!
 7. Run the PowerShell with administrator privileges
 8. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEA_ADFSProvider
 9. Mark the checkbox
