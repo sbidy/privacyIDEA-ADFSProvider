@@ -13,7 +13,7 @@ namespace privacyIDEAADFSProvider
 {
     public class OTPprovider
     {
-
+        private string debugPrefix = "ID3Aprovider: ";
         private string URL;
         /// <summary>
         /// Class creates a OTPprovide for the privacyIDEA system
@@ -36,7 +36,8 @@ namespace privacyIDEAADFSProvider
             try
             {
                 // check if otp contains only numbers
-                if (!IsDigitsOnly(OTPpin)) return false;
+                // Bug #10 - beaks the OTP+PIN combination - removed
+                    //if (!IsDigitsOnly(OTPpin)) return false;
 
                 using (WebClient client = new WebClient())
                 {
@@ -48,23 +49,23 @@ namespace privacyIDEAADFSProvider
                         {"realm", realm}
                     });
                     responseString = Encoding.UTF8.GetString(response);
+                    Debug.WriteLine(debugPrefix+getJsonNode(responseString, "message"));
                 }
-                Debug.WriteLine("Response: " + responseString);
                 return (getJsonNode(responseString, "status") == "true" && getJsonNode(responseString, "value") == "true");
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(wex);
+                Debug.WriteLine(debugPrefix + wex);
                 return false;
             }
         }
         /// <summary>
-        /// Trigger for a otp challange to the PID3
+        /// Trigger for a otp challenge to the PID3
         /// </summary>
         /// <param name="OTPuser">User name for the token</param>
         /// <param name="realm">Domain/realm name</param>
         /// <param name="token">Admin token</param>
-        public void triggerChellenge(string OTPuser, string realm, string token)
+        public void triggerChallenge(string OTPuser, string realm, string token)
         {
             try
             {
@@ -77,11 +78,12 @@ namespace privacyIDEAADFSProvider
                            { "user", OTPuser},
                            { "realm ", realm},
                     });
+                    Debug.WriteLine(debugPrefix + getJsonNode(Encoding.UTF8.GetString(response), "messages"));
                 }
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(wex);
+                Debug.WriteLine(debugPrefix + wex);
             }
 
         }
@@ -110,7 +112,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(wex);
+                Debug.WriteLine(debugPrefix + wex);
                 return "";
             }
 
@@ -142,7 +144,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(wex);
+                Debug.WriteLine(debugPrefix + wex);
                 //return getQRimage(responseString);
                 return new Dictionary<string, string>();
             }
@@ -175,7 +177,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(wex);
+                Debug.WriteLine(debugPrefix + wex);
                 return false;
             }
         }
@@ -223,8 +225,16 @@ namespace privacyIDEAADFSProvider
         /// <returns>returns the value (inner text) from the defined node</returns>
         private string getJsonNode(string jsonResponse, string nodename)
         {
-            var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(Encoding.ASCII.GetBytes(jsonResponse), new XmlDictionaryReaderQuotas()));
-            return xml.Descendants(nodename).Single().Value;
+            try
+            {
+                var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(Encoding.ASCII.GetBytes(jsonResponse), new XmlDictionaryReaderQuotas()));
+                return xml.Descendants(nodename).Single().Value;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(debugPrefix + ex);
+                return "";
+            }
         }
     }
     public class WrongOTPExeption : Exception

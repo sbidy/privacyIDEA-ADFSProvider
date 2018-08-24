@@ -1,11 +1,10 @@
-﻿# Install the provider
+# Install the provider
 
 function Gac-Util
 {
     param (
         [parameter(Mandatory = $true)][string] $assembly
     )
-
     try
     {
         $Error.Clear()
@@ -23,15 +22,14 @@ function Gac-Util
 
         Write-Host "`t`t$($MyInvocation.InvocationName): Assembly $assembly gacced"
     }
-
     catch
     {
         Write-Host "`t`t$($MyInvocation.InvocationName): $_"
     }
 }
 
-Set-location "C:\Program Files\privacyIDEA-ADFSProvider"
-Gac-Util "C:\Program Files\privacyIDEA-ADFSProvider\privacyIDEA-ADFSProvider.dll"
+Set-location "C:\Program Files\privacyIDEAProvider"
+Gac-Util "C:\Program Files\privacyIDEAProvider\privacyIDEA-ADFSProvider.dll"
 
-$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b6483f285cb7b6eb"
-Register-AdfsAuthenticationProvider -TypeName $typeName -Name "privacyIDEA-ADFSProvider" -ConfigurationFilePath "C:\Program Files\privacyIDEA-ADFSProvider\config.xml" -Verbose
+$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b6483f285cb7b6eb"
+Register-AdfsAuthenticationProvider -TypeName $typeName -Name "privacyIDEA-ADFSProvider" -ConfigurationFilePath "C:\Program Files\privacyIDEAProvider\config.xml" -Verbose

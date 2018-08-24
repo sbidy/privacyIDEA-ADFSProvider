@@ -11,7 +11,8 @@ namespace privacyIDEAADFSProvider
 {
     public class Adapter : IAuthenticationAdapter
     {
-
+        private string debugPrefix = "ID3A_ADFSadapter: ";
+        private string version = typeof(Adapter).Assembly.GetName().Version.ToString();
         // TODO: Create a property class
         private string privacyIDEAurl;
         private string privacyIDEArealm;
@@ -26,7 +27,11 @@ namespace privacyIDEAADFSProvider
         public IAuthenticationAdapterMetadata Metadata
         {
             //get { return new <instance of IAuthenticationAdapterMetadata derived class>; }
-            get { return new AdapterMetadata(); }
+            get {
+                AdapterMetadata meta = new AdapterMetadata();
+                meta.adapterversion = version;
+                return meta;
+            }
         }
         /// <summary>
         /// Initiates a new authentication process and returns to the ADFS system.
@@ -48,10 +53,14 @@ namespace privacyIDEAADFSProvider
 
             // trigger challenge
             OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
-            // get a new admin token for all requests
-            token = otp_prov.getAuthToken(admin_user, admin_pw);
-            // trigger a challenge (SMS, Mail ...) for the the user
-            otp_prov.triggerChellenge(username,privacyIDEArealm,token);
+            // get a new admin token for all requests if the an admin pw is defined
+            // #2
+            if (!string.IsNullOrEmpty(admin_pw) && !string.IsNullOrEmpty(admin_user))
+            {
+                token = otp_prov.getAuthToken(admin_user, admin_pw);
+                // trigger a challenge (SMS, Mail ...) for the the user
+                otp_prov.triggerChallenge(username, privacyIDEArealm, token);
+            }
 
             return new AdapterPresentationForm(wellcomemessage);
         }
@@ -97,7 +106,7 @@ namespace privacyIDEAADFSProvider
                         node = doc.DocumentElement.SelectSingleNode("/server/adminpw");
                         admin_pw = node.InnerText;
 #if DEBUG
-                        Debug.WriteLine("Server:" + privacyIDEAurl + " Realm:" + privacyIDEArealm + " SSL status: " + ssl);
+                        Debug.WriteLine(debugPrefix + "Server:" + privacyIDEAurl + " Realm:" + privacyIDEArealm + " SSL status: " + ssl);
 #endif
                     }
                 }
@@ -129,6 +138,7 @@ namespace privacyIDEAADFSProvider
         /// <returns></returns>
         public IAdapterPresentation TryEndAuthentication(IAuthenticationContext authContext, IProofData proofData, HttpListenerRequest request, out Claim[] outgoingClaims)
         {
+            
             outgoingClaims = new Claim[0];
             if (ValidateProofData(proofData, authContext))
             {
@@ -160,13 +170,13 @@ namespace privacyIDEAADFSProvider
                 string otpvalue = (string)proofData.Properties["otpvalue"];
                 OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
 #if DEBUG
-                Debug.WriteLine("OTP Code: " + otpvalue + " User: " + username + " Server:" + privacyIDEAurl);
+                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + username + " Server: " + privacyIDEAurl);
 #endif
                 return otp_prov.getAuthOTP(username, otpvalue, privacyIDEArealm);
             }
             catch
             {
-                throw new ExternalAuthenticationException("Error - cant validate the otp value", authContext);
+                throw new ExternalAuthenticationException("Error - can't validate the otp value", authContext);
             }
         }
     }
