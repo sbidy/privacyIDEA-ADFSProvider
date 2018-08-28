@@ -31,5 +31,5 @@ function Gac-Util
 Set-location "C:\Program Files\privacyIDEAProvider"
 Gac-Util "C:\Program Files\privacyIDEAProvider\privacyIDEA-ADFSProvider.dll"
 
-$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.3.0.0, Culture=neutral, PublicKeyToken=b6483f285cb7b6eb"
+$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.3.1.0, Culture=neutral, PublicKeyToken=b6483f285cb7b6eb"
 Register-AdfsAuthenticationProvider -TypeName $typeName -Name "privacyIDEA-ADFSProvider" -ConfigurationFilePath "C:\Program Files\privacyIDEAProvider\config.xml" -Verbose
