@@ -30,7 +30,7 @@ To contribute, please fork this repository and make pull requests to the master 
 - Don’t require a reboot (on install and uninstall)
 
 ## Installation / usage
-To install the provider you have to download the pre-compiled binary (click on "releases"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
+To install the provider you have to download the pre-compiled binary (click on "[releases](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/)"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
 
 ### Step-by-step
 1. Download the zip from releases or compile the binaries by your own
@@ -38,7 +38,6 @@ To install the provider you have to download the pre-compiled binary (click on "
 3. Extract the zip and copy all files to this folder at the ADFS server
 5. Open the PowerShell script and check the "StartPath" variable - this should be "C:\Program Files\privacyIDEAProvider\"
 6. Open the config.xml file and update the information in it
-!!! The privacyIDEA user should have permissions to authenticate users !!!
 7. Run the PowerShell with administrator privileges
 8. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEA_ADFSProvider
 9. Mark the checkbox
@@ -55,26 +54,6 @@ Install a ADFS on-prem; implement these provider and configure your Office 365 t
 ![Schema](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/drawing.png)
 
 More info see the Microsoft documentation.
-
-## Debug
-To debug the adapter you have to install the "DebugView" tool from Microsoft [Download](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview).
-Configure the DebugView to capture global win32 events:
-
-![Debug config](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/Debug_Cap.PNG)
-
-Some debug and error information are logged to the debug channel:
-
-![Debug_view](https://raw.githubusercontent.com/sbidy/privacyIDEA-ADFSProvider/master/Debug_Cap2.PNG)
-
-The entries have a prefix.
-
-Please look also to the EventLog! `Custom Views -> Server Rols -> Active Directory Federation Services`
-
-## TBD
-- Code review
-- Security review
-- Some paperwork and references
-...
 
 ## Authors
 Stephan Traub - Sbidy -> https://github.com/sbidy

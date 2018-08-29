@@ -36,7 +36,8 @@ namespace privacyIDEAADFSProvider
             try
             {
                 // check if otp contains only numbers
-                if (!IsDigitsOnly(OTPpin)) return false;
+                // Bug #10 - beaks the OTP+PIN combination - removed
+                    //if (!IsDigitsOnly(OTPpin)) return false;
 
                 using (WebClient client = new WebClient())
                 {
