@@ -36,12 +36,14 @@ To install the provider you have to download the pre-compiled binary (click on "
 1. Download the zip from releases or compile the binaries by your own
 2. Create a folder at the ADFS under "C:\Program Files\privacyIDEAProvider\"
 3. Extract the zip and copy all files to this folder at the ADFS server
+4. Eventually unblock the powershell scripts (under the file properties)
 5. Open the PowerShell script and check the "StartPath" variable - this should be "C:\Program Files\privacyIDEAProvider\"
 6. Open the config.xml file and update the information in it
 7. Run the PowerShell with administrator privileges
-8. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEA_ADFSProvider
-9. Mark the checkbox
-10. Now you should see an OTP textbox after the normal username/password form
+8. Set the execution policy temporary to "unrestricted" or use `PowerShell.exe -ExecutionPolicy Bypass -File <path to installer>.ps1`
+9. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEA_ADFSProvider
+10. Mark the checkbox
+11. Now you should see an OTP textbox after the normal username/password form
 
 Test: https://fqdn.domain.com/adfs/ls/IdpInitiatedSignon.aspx (change the FQDN)
 
