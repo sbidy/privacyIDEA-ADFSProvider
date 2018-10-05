@@ -1,3 +1,8 @@
+### Version 1.3.2
+  - Localization implemented
+  - XML deserialization updated
+  - Please use new config and new installer for 1.3.2
+
 ## Abstract
 A Microsoft Active Directory Federation Service (ADFS) provider for the open source authentication system [privacyIDEA](https://www.privacyidea.org/).
 
