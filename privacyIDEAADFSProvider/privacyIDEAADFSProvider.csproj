@@ -33,7 +33,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>privacyIDEAProvider.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>privacyIDEAADFSProvider.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.IdentityServer.Web">
@@ -53,6 +53,7 @@
     <Compile Include="Adapter.cs" />
     <Compile Include="AdapterMetadata.cs" />
     <Compile Include="AdapterPresentationForm.cs" />
+    <Compile Include="config.cs" />
     <Compile Include="OTPprovider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -73,11 +74,11 @@
     <None Include="config.xml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="privacyIDEAADFSProvider.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Install\Install-ADFSProvider.ps1" />
     <None Include="Install\Remove-ADFSProvider.ps1" />
-    <None Include="privacyIDEAProvider.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,8 +5,11 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
-// b6483f285cb7b6eb
+// old b6483f285cb7b6eb
+// new bf6bdb60967d5ecc 1.3.2
+
 namespace privacyIDEAADFSProvider
 {
     public class Adapter : IAuthenticationAdapter
@@ -18,11 +21,10 @@ namespace privacyIDEAADFSProvider
         private string privacyIDEArealm;
         private string username;
         private bool ssl = true;
-        private string erromessage;
-        private string wellcomemessage;
         private string token;
         private string admin_user;
         private string admin_pw;
+        public ADFSinterface[] uidefinition; 
 
         public IAuthenticationAdapterMetadata Metadata
         {
@@ -62,7 +64,7 @@ namespace privacyIDEAADFSProvider
                 otp_prov.triggerChallenge(username, privacyIDEArealm, token);
             }
 
-            return new AdapterPresentationForm(wellcomemessage);
+            return new AdapterPresentationForm(uidefinition);
         }
 
         // TODO remove ?
@@ -82,32 +84,19 @@ namespace privacyIDEAADFSProvider
                     // TODO: Handle errors and exceptions
                     using (StreamReader reader = new StreamReader(configData.Data, Encoding.UTF8))
                     {
-                        string config = reader.ReadToEnd();
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(config);
-                        // parse the xml document
-                        // TODO: check for the correctness ??
-                        XmlNode node = doc.DocumentElement.SelectSingleNode("/server/url");
-                        privacyIDEAurl = node.InnerText;
-                        node = doc.DocumentElement.SelectSingleNode("/server/realm");
-                        privacyIDEArealm = node.InnerText;
-                        node = doc.DocumentElement.SelectSingleNode("/server/ssl");
-                        // SSL check activate or disabel
-                        // TODO: Should be removed !?
-                        ssl = node.InnerText.ToLower() == "false" ? false : true;
-                        // Text in html document
-                        node = doc.DocumentElement.SelectSingleNode("/server/interface/wellcomemessage");
-                        wellcomemessage = node.InnerText;
-                        node = doc.DocumentElement.SelectSingleNode("/server/interface/errormessage");
-                        erromessage = node.InnerText;
-                        // admin credentials
-                        node = doc.DocumentElement.SelectSingleNode("/server/adminuser");
-                        admin_user = node.InnerText;
-                        node = doc.DocumentElement.SelectSingleNode("/server/adminpw");
-                        admin_pw = node.InnerText;
-#if DEBUG
-                        Debug.WriteLine(debugPrefix + "Server:" + privacyIDEAurl + " Realm:" + privacyIDEArealm + " SSL status: " + ssl);
-#endif
+                        XmlRootAttribute xRoot = new XmlRootAttribute
+                        {
+                            ElementName = "server",
+                            IsNullable = true
+                        };
+                        XmlSerializer serializer = new XmlSerializer(typeof(ADFSserver), xRoot);
+                        ADFSserver server_config = (ADFSserver)serializer.Deserialize(reader);
+                        admin_pw = server_config.adminpw;
+                        admin_user = server_config.adminuser;
+                        ssl = server_config.ssl.ToLower() == "false" ? false : true;
+                        privacyIDEArealm = server_config.realm;
+                        privacyIDEAurl = server_config.url;
+                        uidefinition = server_config.@interface;
                     }
                 }
             }
@@ -126,7 +115,7 @@ namespace privacyIDEAADFSProvider
         /// <returns>new instance of IAdapterPresentationForm derived class</returns>
         public IAdapterPresentation OnError(HttpListenerRequest request, ExternalAuthenticationException ex)
         {
-            return new AdapterPresentationForm(true, erromessage);
+            return new AdapterPresentationForm(true, uidefinition);
         }
         /// <summary>
         /// Function call after the user hits submit - it proofs the values (OTP pin)
@@ -138,7 +127,6 @@ namespace privacyIDEAADFSProvider
         /// <returns></returns>
         public IAdapterPresentation TryEndAuthentication(IAuthenticationContext authContext, IProofData proofData, HttpListenerRequest request, out Claim[] outgoingClaims)
         {
-            
             outgoingClaims = new Claim[0];
             if (ValidateProofData(proofData, authContext))
             {
@@ -153,7 +141,7 @@ namespace privacyIDEAADFSProvider
             else
             {
                 //authentication not complete - return new instance of IAdapterPresentationForm derived class and the generic error message
-                return new AdapterPresentationForm(true, erromessage);
+                return new AdapterPresentationForm(true, uidefinition);
             }
         }
 

@@ -1,28 +1,49 @@
 ﻿using Microsoft.IdentityServer.Web.Authentication.External;
+using System.Diagnostics;
 
 namespace privacyIDEAADFSProvider
 {
     class AdapterPresentationForm : IAdapterPresentationForm
     {
-        public string errormessage = "";
-        public string wellcomemassage = "";
+        public ADFSinterface[] inter;
         private bool error = false;
 
-        public AdapterPresentationForm(bool error, string errormessage)
+        public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
         {
             this.error = error;
-            this.errormessage = errormessage;
+            this.inter = adfsinter;
         }
-        public AdapterPresentationForm(string wellcomemassage)
+        public AdapterPresentationForm(ADFSinterface[] adfsinter)
         {
-            this.wellcomemassage = wellcomemassage;
+            this.inter = adfsinter;
         }
 
         /// Returns the HTML Form fragment that contains the adapter user interface. This data will be included in the web page that is presented
         /// to the cient.
         public string GetFormHtml(int lcid)
         {
+            // check the localization with the lcid
+            string errormessage = "";
+            string wellcomemassage = "";
             string htmlTemplate = Resources.AuthPage; // return normal page
+
+            if (inter != null)
+            {
+                foreach (ADFSinterface adfsui in inter)
+                {
+                    if (adfsui.LICD == lcid.ToString())
+                    {
+                        errormessage = adfsui.errormessage;
+                        wellcomemassage = adfsui.wellcomemessage;
+                    }
+                    // fallback to EN-US if nothing is defined
+                    else
+                    {
+                        errormessage = "Login failed! Please try again!";
+                        wellcomemassage = "Please provide the one-time-password:";
+                    }
+                }
+            }
             if (error)
             {
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", errormessage);

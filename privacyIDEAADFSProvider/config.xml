@@ -14,9 +14,16 @@
   <adminuser></adminuser>
   <adminpw></adminpw>
 
-  <!-- UI text for the websites (no localization for now) -->
-  <interface>
+  <!-- 
+        For localization, please use the LCID see https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms912047(v=winembedded.10) 
+        Example: EN-US = 1033, DE-DE = 1031, FR-FR = 1036, SP-SP = 1034
+  -->
+  <interface LICD="1033">
     <errormessage>Login failed! Please try again!</errormessage>
     <wellcomemessage>Please provide the one-time-password:</wellcomemessage>
+  </interface>
+  <interface LICD="1031">
+    <errormessage>Login fehlgeschlagen. Bitte versuchen Sie es erneut!</errormessage>
+    <wellcomemessage>Bitte geben Sie ihren PIN und OTP Token ein:</wellcomemessage>
   </interface>
 </server>
