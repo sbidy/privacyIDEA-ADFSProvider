@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("audius GmbH")]
 [assembly: AssemblyProduct("privacyIDEAADFSProvider")]
-[assembly: AssemblyCopyright("Copyright © audius GmbH 2018 - Stephan traub")]
+[assembly: AssemblyCopyright("Copyright © audius GmbH 2018 - Stephan Traub")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
