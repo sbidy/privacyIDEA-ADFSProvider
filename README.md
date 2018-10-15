@@ -57,7 +57,7 @@ Check the EventLog (Custom Views -> Server Rols -> Active Directory Federation S
 
 ## Configuration changes 
 If you change the configuration, you have to reinstall the authentication provider.
-It is not sufficient to only restart the service.
+It is not sufficient to restart the service.
 
 ## Office 365
 If you plan to use a on-prem ADFS to authenticate your Office 365 user, you can also use this provider.
