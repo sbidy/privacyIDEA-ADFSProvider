@@ -53,7 +53,7 @@ To install the provider you have to download the pre-compiled binary (click on "
 
 Test: https://fqdn.domain.com/adfs/ls/IdpInitiatedSignon.aspx (change the FQDN)
 
-Check the EventLog (Custom Views -> Server Rols -> Active Directory Federation Services) for errors!
+Check the EventLog (Custom Views -> Server Roles -> Active Directory Federation Services) for errors!
 
 ## Configuration changes 
 If you change the configuration, you have to reinstall the authentication provider.
