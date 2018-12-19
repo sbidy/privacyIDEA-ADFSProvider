@@ -44,6 +44,7 @@ namespace privacyIDEAADFSProvider
         /// <returns>new instance of IAdapterPresentationForm</returns>
         public IAdapterPresentation BeginAuthentication(Claim identityClaim, HttpListenerRequest request, IAuthenticationContext authContext)
         {
+            string transaction_id = "";
             // seperates the username from the domain
             // TODO: Map the domain to the PI3A realm
             string[] tmp = identityClaim.Value.Split('\\');
@@ -52,7 +53,7 @@ namespace privacyIDEAADFSProvider
             // check if ssl is disabled in the config
             // TODO: Delete for security reasons 
             if (!ssl) ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-
+            
             // trigger challenge
             OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
             // get a new admin token for all requests if the an admin pw is defined
@@ -64,10 +65,10 @@ namespace privacyIDEAADFSProvider
 #if DEBUG
                 Debug.WriteLine(debugPrefix + " User: " + username + " Server: " + privacyIDEArealm);
 #endif
-                otp_prov.triggerChallenge(username, privacyIDEArealm, token);
+                transaction_id = otp_prov.triggerChallenge(username, privacyIDEArealm, token);
             }
 
-            return new AdapterPresentationForm(uidefinition, username, privacyIDEArealm);
+            return new AdapterPresentationForm(uidefinition, username, privacyIDEArealm, transaction_id);
         }
 
         // TODO remove ?
@@ -162,12 +163,13 @@ namespace privacyIDEAADFSProvider
                 // fix for #14
                 string session_user = (string)proofData.Properties["username"];
                 string session_realm = (string)proofData.Properties["realm"];
+                string transaction_id = (string)proofData.Properties["transaction_id"];
                 // end fix
                 OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
 #if DEBUG
-                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm);
+                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm + " Transaction_id" + transaction_id);
 #endif
-                return otp_prov.getAuthOTP(username, otpvalue, session_realm);
+                return otp_prov.getAuthOTP(session_user, otpvalue, session_realm, transaction_id);
             }
             catch
             {

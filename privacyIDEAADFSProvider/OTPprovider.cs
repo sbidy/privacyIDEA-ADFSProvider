@@ -30,7 +30,7 @@ namespace privacyIDEAADFSProvider
         /// <param name="OTPpin">PIN for validation</param>
         /// <param name="realm">Domain/realm name</param>
         /// <returns>true if the pin is correct</returns>
-        public bool getAuthOTP(string OTPuser, string OTPpin, string realm)
+        public bool getAuthOTP(string OTPuser, string OTPpin, string realm, string transaction_id)
         {
             string responseString = "";
             try
@@ -46,10 +46,10 @@ namespace privacyIDEAADFSProvider
                     {
                         {"pass", OTPpin},
                         {"user", OTPuser},
-                        {"realm", realm}
+                        {"realm", realm},
+                        {"transaction_id", transaction_id}
                     });
                     responseString = Encoding.UTF8.GetString(response);
-                    Debug.WriteLine(debugPrefix+getJsonNode(responseString, "message"));
                 }
                 return (getJsonNode(responseString, "status") == "true" && getJsonNode(responseString, "value") == "true");
             }
@@ -65,8 +65,9 @@ namespace privacyIDEAADFSProvider
         /// <param name="OTPuser">User name for the token</param>
         /// <param name="realm">Domain/realm name</param>
         /// <param name="token">Admin token</param>
-        public void triggerChallenge(string OTPuser, string realm, string token)
+        public string triggerChallenge(string OTPuser, string realm, string token)
         {
+            string responseString = "";
             try
             {
                 using (WebClient client = new WebClient())
@@ -78,12 +79,17 @@ namespace privacyIDEAADFSProvider
                            { "user", OTPuser},
                            { "realm ", realm},
                     });
-                    Debug.WriteLine(debugPrefix + getJsonNode(Encoding.UTF8.GetString(response), "messages"));
+                    responseString = Encoding.UTF8.GetString(response);
+                    string transaction_id = getJsonNode(responseString, "transaction_ids");
+                    // ToDo - not realy a solution if multible tocken enrolled!! For #15
+                    if (transaction_id.Length > 20) return transaction_id.Remove(20);
+                    else return transaction_id;
                 }
             }
             catch (WebException wex)
             {
                 Debug.WriteLine(debugPrefix + wex);
+                return "";
             }
 
         }

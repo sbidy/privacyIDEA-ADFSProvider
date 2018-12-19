@@ -9,16 +9,18 @@ namespace privacyIDEAADFSProvider
         private bool error = false;
         private string username = "";
         private string realm = "";
+        private string id = "";
 
         public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
         {
             this.error = error;
             this.inter = adfsinter;
         }
-        public AdapterPresentationForm(ADFSinterface[] adfsinter, string username, string realm)
+        public AdapterPresentationForm(ADFSinterface[] adfsinter, string username, string realm, string id)
         {
             this.inter = adfsinter;
             this.username = username;
+            this.id = id;
             this.realm = realm;
         }
 
@@ -48,9 +50,10 @@ namespace privacyIDEAADFSProvider
                     }
                 }
             }
-            // fix for #14
+            // fix for #14 and 15
             htmlTemplate = htmlTemplate.Replace("#USER#", this.username);
             htmlTemplate = htmlTemplate.Replace("#REALM#", this.realm);
+            htmlTemplate = htmlTemplate.Replace("#ID#", this.id);
             // end fix
             if (error)
             {
