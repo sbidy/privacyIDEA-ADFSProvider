@@ -167,7 +167,7 @@ namespace privacyIDEAADFSProvider
 #if DEBUG
                 Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm);
 #endif
-                return otp_prov.getAuthOTP(username, otpvalue, session_realm);
+                return otp_prov.getAuthOTP(session_user, otpvalue, session_realm);
             }
             catch
             {
