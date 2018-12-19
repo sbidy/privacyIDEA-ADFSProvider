@@ -3,12 +3,17 @@
         <!-- These inputs are required by the presentation framework. Do not modify or remove -->
         <input id="authMethod" type="hidden" name="AuthMethod" value="%AuthMethod%" />
         <input id="context" type="hidden" name="Context" value="%Context%" />
+        <!-- Inputs for session affinity - Do not modify or remove - See #14 -->
+        <input id="username" type="hidden" name="username" value="#USER#" />
+        <input id="transaction_id" type="hidden" name="transaction_id" value="#ID#" />
+        <input id="realm" type="hidden" name="realm" value="#REALM#" />
+
         <!-- End inputs are required by the presentation framework. -->
         <p id="pageIntroductionText" style="color:red">#ERROR#</p>
         <label for="otpvalue" class="block">#MESSAGE#</label>
-        <input id="otpvalue" name="otpvalue" type="password" value="" class="text" placeholder="OTP Token" size="30"/>
-        <div id="submissionArea" class="submitMargin"> 
-            <input id="submitButton" type="submit" name="Submit" value="Submit"/>
+        <input id="otpvalue" name="otpvalue" type="password" value="" class="text" placeholder="OTP Token" size="30" />
+        <div id="submissionArea" class="submitMargin">
+            <input id="submitButton" type="submit" name="Submit" value="Submit" />
         </div>
     </form>
     <div id="intro" class="groupMargin">

@@ -7,15 +7,19 @@ namespace privacyIDEAADFSProvider
     {
         public ADFSinterface[] inter;
         private bool error = false;
+        private string username = "";
+        private string realm = "";
 
         public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
         {
             this.error = error;
             this.inter = adfsinter;
         }
-        public AdapterPresentationForm(ADFSinterface[] adfsinter)
+        public AdapterPresentationForm(ADFSinterface[] adfsinter, string username, string realm)
         {
             this.inter = adfsinter;
+            this.username = username;
+            this.realm = realm;
         }
 
         /// Returns the HTML Form fragment that contains the adapter user interface. This data will be included in the web page that is presented
@@ -44,6 +48,10 @@ namespace privacyIDEAADFSProvider
                     }
                 }
             }
+            // fix for #14
+            htmlTemplate = htmlTemplate.Replace("#USER#", this.username);
+            htmlTemplate = htmlTemplate.Replace("#REALM#", this.realm);
+            // end fix
             if (error)
             {
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", errormessage);
@@ -53,6 +61,7 @@ namespace privacyIDEAADFSProvider
             {
                 htmlTemplate = htmlTemplate.Replace("#MESSAGE#", wellcomemassage);
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", "");
+
             }
             return htmlTemplate;
         }

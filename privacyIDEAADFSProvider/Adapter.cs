@@ -18,8 +18,8 @@ namespace privacyIDEAADFSProvider
         private string version = typeof(Adapter).Assembly.GetName().Version.ToString();
         // TODO: Create a property class
         private string privacyIDEAurl;
-        private string privacyIDEArealm;
-        private string username;
+        public string privacyIDEArealm;
+        public string username;
         private bool ssl = true;
         private string token;
         private string admin_user;
@@ -61,10 +61,13 @@ namespace privacyIDEAADFSProvider
             {
                 token = otp_prov.getAuthToken(admin_user, admin_pw);
                 // trigger a challenge (SMS, Mail ...) for the the user
+#if DEBUG
+                Debug.WriteLine(debugPrefix + " User: " + username + " Server: " + privacyIDEArealm);
+#endif
                 otp_prov.triggerChallenge(username, privacyIDEArealm, token);
             }
 
-            return new AdapterPresentationForm(uidefinition);
+            return new AdapterPresentationForm(uidefinition, username, privacyIDEArealm);
         }
 
         // TODO remove ?
@@ -156,11 +159,15 @@ namespace privacyIDEAADFSProvider
             try
             {
                 string otpvalue = (string)proofData.Properties["otpvalue"];
+                // fix for #14
+                string session_user = (string)proofData.Properties["username"];
+                string session_realm = (string)proofData.Properties["realm"];
+                // end fix
                 OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
 #if DEBUG
-                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + username + " Server: " + privacyIDEAurl);
+                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm);
 #endif
-                return otp_prov.getAuthOTP(username, otpvalue, privacyIDEArealm);
+                return otp_prov.getAuthOTP(username, otpvalue, session_realm);
             }
             catch
             {
