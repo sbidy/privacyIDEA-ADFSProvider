@@ -37,18 +37,20 @@ namespace privacyIDEAADFSProvider
             {
                 // check if otp contains only numbers
                 // Bug #10 - beaks the OTP+PIN combination - removed
-                    //if (!IsDigitsOnly(OTPpin)) return false;
+                //if (!IsDigitsOnly(OTPpin)) return false;
 
+                NameValueCollection request_header = new NameValueCollection(){
+                        {"pass", OTPpin},
+                        {"user", OTPuser},
+                        {"realm", realm}
+                    };
+                // add transaction id if challenge request
+                if (!string.IsNullOrEmpty(transaction_id)) request_header.Add("transaction_id", transaction_id);
+                // send reqeust
                 using (WebClient client = new WebClient())
                 {
                     byte[] response =
-                    client.UploadValues(URL + "/validate/check", new NameValueCollection()
-                    {
-                        {"pass", OTPpin},
-                        {"user", OTPuser},
-                        {"realm", realm},
-                        {"transaction_id", transaction_id}
-                    });
+                    client.UploadValues(URL + "/validate/check", request_header);
                     responseString = Encoding.UTF8.GetString(response);
                 }
                 return (getJsonNode(responseString, "status") == "true" && getJsonNode(responseString, "value") == "true");
