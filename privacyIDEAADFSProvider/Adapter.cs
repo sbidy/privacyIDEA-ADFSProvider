@@ -20,11 +20,13 @@ namespace privacyIDEAADFSProvider
         private string privacyIDEAurl;
         public string privacyIDEArealm;
         public string username;
+        string transaction_id = "";
         private bool ssl = true;
         private string token;
         private string admin_user;
         private string admin_pw;
-        public ADFSinterface[] uidefinition; 
+        public ADFSinterface[] uidefinition;
+        private OTPprovider otp_prov;
 
         public IAuthenticationAdapterMetadata Metadata
         {
@@ -44,7 +46,6 @@ namespace privacyIDEAADFSProvider
         /// <returns>new instance of IAdapterPresentationForm</returns>
         public IAdapterPresentation BeginAuthentication(Claim identityClaim, HttpListenerRequest request, IAuthenticationContext authContext)
         {
-            string transaction_id = "";
             // seperates the username from the domain
             // TODO: Map the domain to the PI3A realm
             string[] tmp = identityClaim.Value.Split('\\');
@@ -53,9 +54,9 @@ namespace privacyIDEAADFSProvider
             // check if ssl is disabled in the config
             // TODO: Delete for security reasons 
             if (!ssl) ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
-            
+
             // trigger challenge
-            OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
+            otp_prov = new OTPprovider(privacyIDEAurl);
             // get a new admin token for all requests if the an admin pw is defined
             // #2
             if (!string.IsNullOrEmpty(admin_pw) && !string.IsNullOrEmpty(admin_user))
@@ -68,7 +69,7 @@ namespace privacyIDEAADFSProvider
                 transaction_id = otp_prov.triggerChallenge(username, privacyIDEArealm, token);
             }
 
-            return new AdapterPresentationForm(uidefinition, username, privacyIDEArealm, transaction_id);
+            return new AdapterPresentationForm(false, uidefinition, username, privacyIDEArealm, transaction_id);
         }
 
         // TODO remove ?
@@ -119,7 +120,7 @@ namespace privacyIDEAADFSProvider
         /// <returns>new instance of IAdapterPresentationForm derived class</returns>
         public IAdapterPresentation OnError(HttpListenerRequest request, ExternalAuthenticationException ex)
         {
-            return new AdapterPresentationForm(true, uidefinition);
+            return new AdapterPresentationForm(true, uidefinition, username, privacyIDEArealm, transaction_id);
         }
         /// <summary>
         /// Function call after the user hits submit - it proofs the values (OTP pin)
@@ -145,7 +146,7 @@ namespace privacyIDEAADFSProvider
             else
             {
                 //authentication not complete - return new instance of IAdapterPresentationForm derived class and the generic error message
-                return new AdapterPresentationForm(true, uidefinition);
+                return new AdapterPresentationForm(true, uidefinition, username, privacyIDEArealm, transaction_id);
             }
         }
 
@@ -165,7 +166,6 @@ namespace privacyIDEAADFSProvider
                 string session_realm = (string)proofData.Properties["realm"];
                 string transaction_id = (string)proofData.Properties["transaction_id"];
                 // end fix
-                OTPprovider otp_prov = new OTPprovider(privacyIDEAurl);
 #if DEBUG
                 Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm + " Transaction_id" + transaction_id);
 #endif

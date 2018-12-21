@@ -15,6 +15,7 @@ namespace privacyIDEAADFSProvider
     {
         private string debugPrefix = "ID3Aprovider: ";
         private string URL;
+        private bool isChallengeToken = false;
         /// <summary>
         /// Class creates a OTPprovide for the privacyIDEA system
         /// </summary>
@@ -24,13 +25,40 @@ namespace privacyIDEAADFSProvider
             URL = privacyIDEAurl;
         }
         /// <summary>
+        /// Dispatcher methode for #14 - made two request to avoid auth fail by TOTP with PIN
+        /// </summary>
+        /// <param name="OTPuser">User name for the token</param>
+        /// <param name="OTPpin">PIN for validation</param>
+        /// <param name="realm">Domain/realm name</param>
+        /// <param name="transaction_id">ID for the coresponding challenge</param>
+        /// <returns>true if the pin is correct</returns>
+        public bool getAuthOTP(string OTPuser, string OTPpin, string realm, string transaction_id)
+        {
+            if (isChallengeToken)
+            {
+                // first request with transaction_id
+                bool request_with_id = validateOTP(OTPuser, OTPpin, realm, transaction_id);
+                // first ture retrun direct (SMS or Mail token)
+                if (request_with_id) return true;
+                // second request without transaction_id (TOTP)
+                else return validateOTP(OTPuser, OTPpin, realm, null);
+            }
+            else
+            {
+                // if no challenge token for the user exists request without
+                return validateOTP(OTPuser, OTPpin, realm, transaction_id);
+            }
+        }
+
+        /// <summary>
         /// Validates a otp pin to the PID3
         /// </summary>
         /// <param name="OTPuser">User name for the token</param>
         /// <param name="OTPpin">PIN for validation</param>
         /// <param name="realm">Domain/realm name</param>
+        /// <param name="transaction_id">ID for the coresponding challenge</param>
         /// <returns>true if the pin is correct</returns>
-        public bool getAuthOTP(string OTPuser, string OTPpin, string realm, string transaction_id)
+        private bool validateOTP(string OTPuser, string OTPpin, string realm, string transaction_id)
         {
             string responseString = "";
             try
@@ -67,6 +95,7 @@ namespace privacyIDEAADFSProvider
         /// <param name="OTPuser">User name for the token</param>
         /// <param name="realm">Domain/realm name</param>
         /// <param name="token">Admin token</param>
+        /// <returns>string transaction_id for the challenge</returns>
         public string triggerChallenge(string OTPuser, string realm, string token)
         {
             string responseString = "";
@@ -82,10 +111,12 @@ namespace privacyIDEAADFSProvider
                            { "realm ", realm},
                     });
                     responseString = Encoding.UTF8.GetString(response);
+                    // get transaction id from response
                     string transaction_id = getJsonNode(responseString, "transaction_ids");
-                    // ToDo - not realy a solution if multible tocken enrolled!! For #15
-                    if (transaction_id.Length > 20) return transaction_id.Remove(20);
-                    else return transaction_id;
+                    if (transaction_id.Length > 20) transaction_id = transaction_id.Remove(20);
+                    // check if use has challenge token
+                    if (getJsonNode(responseString, "value") != "0") this.isChallengeToken = true;
+                    return transaction_id;
                 }
             }
             catch (WebException wex)

@@ -11,13 +11,9 @@ namespace privacyIDEAADFSProvider
         private string realm = "";
         private string id = "";
 
-        public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
+        public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter, string username, string realm, string id)
         {
             this.error = error;
-            this.inter = adfsinter;
-        }
-        public AdapterPresentationForm(ADFSinterface[] adfsinter, string username, string realm, string id)
-        {
             this.inter = adfsinter;
             this.username = username;
             this.id = id;
