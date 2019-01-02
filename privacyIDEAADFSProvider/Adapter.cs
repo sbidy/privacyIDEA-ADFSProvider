@@ -46,8 +46,11 @@ namespace privacyIDEAADFSProvider
         /// <returns>new instance of IAdapterPresentationForm</returns>
         public IAdapterPresentation BeginAuthentication(Claim identityClaim, HttpListenerRequest request, IAuthenticationContext authContext)
         {
+#if DEBUG
+                Debug.WriteLine(debugPrefix + " Claim value: " + identityClaim.Value);
+#endif
             // seperates the username from the domain
-            // TODO: Map the domain to the PI3A realm
+            // TODO: Map the domain to the ID3A realm
             string[] tmp = identityClaim.Value.Split('\\');
             if(tmp.Length > 1) username = tmp[1];
             else username = tmp[0];
@@ -64,7 +67,7 @@ namespace privacyIDEAADFSProvider
                 token = otp_prov.getAuthToken(admin_user, admin_pw);
                 // trigger a challenge (SMS, Mail ...) for the the user
 #if DEBUG
-                Debug.WriteLine(debugPrefix + " User: " + username + " Server: " + privacyIDEArealm);
+                Debug.WriteLine(debugPrefix + " User: " + username + " Realm: " + privacyIDEArealm);
 #endif
                 transaction_id = otp_prov.triggerChallenge(username, privacyIDEArealm, token);
             }
@@ -167,7 +170,7 @@ namespace privacyIDEAADFSProvider
                 string transaction_id = (string)proofData.Properties["transaction_id"];
                 // end fix
 #if DEBUG
-                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm + " Transaction_id" + transaction_id);
+                Debug.WriteLine(debugPrefix+"OTP Code: " + otpvalue + " User: " + session_user + " Server: " + session_realm + " Transaction_id: " + transaction_id);
 #endif
                 return otp_prov.getAuthOTP(session_user, otpvalue, session_realm, transaction_id);
             }
