@@ -1,6 +1,6 @@
 ### Version 1.3.3
   - Bug fixes for #14 and #15
-  - Please use new installer PowerShell for 1.3.3 !!
+  - Please use the new PowerShell installer for 1.3.3 !!
 
 ## Abstract
 A Microsoft Active Directory Federation Service (ADFS) provider for the open source authentication system [privacyIDEA](https://www.privacyidea.org/).
