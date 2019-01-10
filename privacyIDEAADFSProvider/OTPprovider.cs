@@ -13,7 +13,6 @@ namespace privacyIDEAADFSProvider
 {
     public class OTPprovider
     {
-        private string debugPrefix = "ID3Aprovider: ";
         private string URL;
         private bool isChallengeToken = false;
         /// <summary>
@@ -85,7 +84,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(debugPrefix + wex);
+                LogEvent(EventContext.ID3Aprovider, "validateOTP: " + wex.Message + "\n\n" + wex, EventLogEntryType.Error);
                 return false;
             }
         }
@@ -121,7 +120,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(debugPrefix + wex);
+                LogEvent(EventContext.ID3Aprovider, "triggerChallenge: " + wex.Message + "\n\n" + wex, EventLogEntryType.Error);
                 return "";
             }
 
@@ -151,7 +150,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(debugPrefix + wex);
+                LogEvent(EventContext.ID3Aprovider, "getAuthToken: " + wex.Message + "\n\n" + wex, EventLogEntryType.Error);
                 return "";
             }
 
@@ -183,7 +182,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(debugPrefix + wex);
+                LogEvent(EventContext.ID3Aprovider, "enrollHOTPToken: " + wex.Message + "\n\n" + wex, EventLogEntryType.Error);
                 //return getQRimage(responseString);
                 return new Dictionary<string, string>();
             }
@@ -216,7 +215,7 @@ namespace privacyIDEAADFSProvider
             }
             catch (WebException wex)
             {
-                Debug.WriteLine(debugPrefix + wex);
+                LogEvent(EventContext.ID3Aprovider, "enrollSMSToken: " + wex.Message + "\n\n"+ wex, EventLogEntryType.Error);
                 return false;
             }
         }
@@ -271,9 +270,31 @@ namespace privacyIDEAADFSProvider
             }
             catch(Exception ex)
             {
-                Debug.WriteLine(debugPrefix + ex);
+                LogEvent(EventContext.ID3Aprovider, "getJsonNode: " + ex.Message + "\n\n" + ex, EventLogEntryType.Error);
                 return "";
             }
+        }
+        /// <summary>
+        /// Helper: Creates a log entry in the MS EventLog under Applications
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="message"></param>
+        /// <param name="type"></param>
+        public void LogEvent(EventContext context, string message, EventLogEntryType type)
+        {
+            int eventID = 0;
+            if (context == EventContext.ID3Aprovider) eventID = 9901;
+            if (context == EventContext.ID3A_ADFSadapter) eventID = 9902;
+            using (EventLog eventLog = new EventLog("AD FS/Admin"))
+            {
+                    eventLog.Source = "privacyIDEAProvider";
+                    eventLog.WriteEntry(message, type, eventID, 0);
+             }
+        }
+        public enum EventContext
+        {
+            ID3Aprovider,
+            ID3A_ADFSadapter
         }
     }
     public class WrongOTPExeption : Exception

@@ -17,6 +17,7 @@ namespace privacyIDEAADFSProvider
         /// to the cient.
         public string GetFormHtml(int lcid)
         {
+            
             // check the localization with the lcid
             string errormessage = "";
             string wellcomemassage = "";

@@ -157,7 +157,12 @@ namespace privacyIDEAADFSProvider
                 return new AdapterPresentationForm(true, uidefinition);
             }
         }
-
+        /// <summary>
+        /// Check the OTP an does the real authentication
+        /// </summary>
+        /// <param name="proofData">the date from the HTML fild</param>
+        /// <param name="authContext">The autch context which contains secrued parametes.</param>
+        /// <returns>True if auth is done and user can be validated</returns>
         bool ValidateProofData(IProofData proofData, IAuthenticationContext authContext)
         {
             if (proofData == null || proofData.Properties == null || !proofData.Properties.ContainsKey("otpvalue"))
@@ -184,5 +189,7 @@ namespace privacyIDEAADFSProvider
                 throw new ExternalAuthenticationException("Error - can't validate the otp value", authContext);
             }
         }
+       
+   
     }
 }
