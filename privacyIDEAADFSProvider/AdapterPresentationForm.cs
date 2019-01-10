@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityServer.Web.Authentication.External;
-using System.Diagnostics;
 
 namespace privacyIDEAADFSProvider
 {
@@ -7,17 +6,11 @@ namespace privacyIDEAADFSProvider
     {
         public ADFSinterface[] inter;
         private bool error = false;
-        private string username = "";
-        private string realm = "";
-        private string id = "";
-
-        public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter, string username, string realm, string id)
+        
+        public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
         {
             this.error = error;
             this.inter = adfsinter;
-            this.username = username;
-            this.id = id;
-            this.realm = realm;
         }
 
         /// Returns the HTML Form fragment that contains the adapter user interface. This data will be included in the web page that is presented
@@ -46,11 +39,6 @@ namespace privacyIDEAADFSProvider
                     }
                 }
             }
-            // fix for #14 and 15
-            htmlTemplate = htmlTemplate.Replace("#USER#", this.username);
-            htmlTemplate = htmlTemplate.Replace("#REALM#", this.realm);
-            htmlTemplate = htmlTemplate.Replace("#ID#", this.id);
-            // end fix
             if (error)
             {
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", errormessage);

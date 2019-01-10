@@ -4,6 +4,11 @@
         <input id="authMethod" type="hidden" name="AuthMethod" value="%AuthMethod%" />
         <input id="context" type="hidden" name="Context" value="%Context%" />
         <!-- End inputs are required by the presentation framework. -->
+        <!-- Inputs for session affinity - Do not modify or remove - See #14 -->
+        <input id="username" type="hidden" name="username" value="#USER#" />
+        <input id="transaction_id" type="hidden" name="transaction_id" value="#ID#" />
+        <input id="realm" type="hidden" name="realm" value="#REALM#" />
+
         <p id="pageIntroductionText" style="color:red"> Wrong One-Time-Password. Please try again!</p>
         <label for="otpvalue" class="block">One-Time-Password</label>
         <input id="otpvalue" name="otpvalue" type="text" value="" class="text" placeholder="OTP Password" size="30" />
