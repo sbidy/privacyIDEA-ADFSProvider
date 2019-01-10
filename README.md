@@ -1,5 +1,5 @@
 # Version 1.3.4
-  - Bug fixes for #14 and #15 - authContext now used
+  - Bug fixes for #14, #15 and #19 - authContext now used
   - Please use the new PowerShell installer for 1.3.4 !!
   - EventLog implemented for error handling. See in the Applications and Service Logs -> AD FS -> Admin
 
