@@ -1,6 +1,7 @@
-### Version 1.3.3
-  - Bug fixes for #14 and #15
-  - Please use the new PowerShell installer for 1.3.3 !!
+### Version 1.3.4
+  - Bug fixes for #14 and #15 - authContext now used
+  - Please use the new PowerShell installer for 1.3.4 !!
+  - EventLog implemented for error handling. See in the Applications and Service Logs -> AD FS -> Admin
 
 ## Abstract
 A Microsoft Active Directory Federation Service (ADFS) provider for the open source authentication system [privacyIDEA](https://www.privacyidea.org/).
@@ -53,6 +54,11 @@ To install the provider you have to download the pre-compiled binary (click on "
 Test: https://fqdn.domain.com/adfs/ls/IdpInitiatedSignon.aspx (change the FQDN)
 
 Check the EventLog (Custom Views -> Server Roles -> Active Directory Federation Services) for errors!
+
+## EventLog (version 1.3.4)
+All errors or exceptions from the provider are logged to the Microsoft Windows internal EventLog.
+See in the Applications and Service Logs -> AD FS -> Admin. The source will be registered with the PowerShell installer (1.3.4).
+The EventID is 9901.
 
 ## Configuration changes 
 If you change the configuration, you have to reinstall the authentication provider.
