@@ -1,4 +1,7 @@
-# Version 1.3.4
+# Version 1.3.5
+  - Now UPNs can be used as Loginname Attribute. See the UPN-Parameter in the config.ini. Default is SAMaccountName. 
+
+## Version 1.3.4 (stable)
   - Bug fixes for #14, #15 and #19 - authContext now used
   - Please use the new PowerShell installer for 1.3.4 !!
   - EventLog implemented for error handling. See in the Applications and Service Logs -> AD FS -> Admin
@@ -44,17 +47,17 @@ To contribute, please fork this repository and make pull requests to the master 
 To install the provider you have to download the pre-compiled binary (click on "[releases](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/)"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
 
 ### Step-by-step
-1. Download the zip from releases or compile the binaries by your own
+1. Download the zip from [releases](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/) or compile the binaries by your own
 2. Create a folder at the ADFS under "C:\Program Files\privacyIDEAProvider\"
-3. Extract the zip and copy all files to this folder at the ADFS server
-4. Eventually unblock the powershell scripts (under the file properties)
+3. Extract the zip and copy all files (PowerShells, config.xml and the provider-dll) to this folder at the ADFS server
+4. Eventually unblock the powershell scripts (under file properties)
 5. Open the PowerShell script and check the "StartPath" variable - this should be "C:\Program Files\privacyIDEAProvider\"
 6. Open the config.xml file and update the information in it
 7. Run the PowerShell with administrator privileges
 8. Set the execution policy temporary to "unrestricted" or use `PowerShell.exe -ExecutionPolicy Bypass -File <path to installer>.ps1`
 9. After the script runs successfully, you can find in the ADFS management gui at "Pre-Authentication" the new privacyIDEA_ADFSProvider
 10. Mark the checkbox
-11. Now you should see an OTP textbox after the normal username/password form
+11. Now you should see an OTP textbox after the normal username/password form (consider the changes in Windows Server 2019) 
 
 Test: https://fqdn.domain.com/adfs/ls/IdpInitiatedSignon.aspx (change the FQDN)
 
