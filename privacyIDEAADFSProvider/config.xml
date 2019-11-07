@@ -6,6 +6,8 @@
   <realm>adfs</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
   <ssl>false</ssl>
+  <!-- use UPN as Loginname Attribute / false = sAMAccountName will be used -->
+  <upn>false</upn>
   <!-- 
       Provide a administrative user and password for the API.
       Only needed if a challenge must be triggered (e.g. Email or SMS token)!

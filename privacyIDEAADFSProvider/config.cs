@@ -30,6 +30,7 @@ namespace privacyIDEAADFSProvider
         private string sslField;
         private string adminuserField;
         private string adminpwField;
+        private string upnField;
         private ADFSinterface[] interfaceField;
 
         /// <remarks/>
@@ -71,6 +72,20 @@ namespace privacyIDEAADFSProvider
             set
             {
                 this.sslField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string upn
+        {
+            get
+            {
+                return this.upnField;
+            }
+            set
+            {
+                this.upnField = value;
             }
         }
 

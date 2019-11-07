@@ -3,10 +3,9 @@ using Microsoft.IdentityServer.Web.Authentication.External;
 using Claim = System.Security.Claims.Claim;
 using System.IO;
 using System.Text;
-using System.Xml;
 using System.Diagnostics;
 using System.Xml.Serialization;
-using System.Collections.Generic;
+using System.DirectoryServices.AccountManagement;
 
 // old b6483f285cb7b6eb
 // new bf6bdb60967d5ecc 1.3.2
@@ -25,6 +24,7 @@ namespace privacyIDEAADFSProvider
         private string token;
         private string admin_user;
         private string admin_pw;
+        private bool use_upn = false;
         public ADFSinterface[] uidefinition;
         private OTPprovider otp_prov;
 
@@ -51,15 +51,35 @@ namespace privacyIDEAADFSProvider
 #endif
             // seperates the username from the domain
             // TODO: Map the domain to the ID3A realm
+            string username, domain, upn;
             string[] tmp = identityClaim.Value.Split('\\');
-            string username = "";
-            if(tmp.Length > 1) username = tmp[1];
-            else username = tmp[0];
+
+            if (tmp.Length > 1)
+            {
+                username = tmp[1];
+                domain = tmp[0];
+                if (use_upn)
+                    // get UPN from sAMAccountName
+                    upn = GetUserPrincipalName(username, domain);
+                else upn = "not configured";
+            }
+            else
+            {
+                username = tmp[0];
+                upn = tmp[0];
+                domain = privacyIDEArealm;
+            }
+#if DEBUG
+                Debug.WriteLine(debugPrefix + " UPN value: " + upn + " Domain value: "+domain);
+#endif
             // check if ssl is disabled in the config
             // TODO: Delete for security reasons 
             if (!ssl) ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
-             // trigger challenge
+            // use upn or sam as loginname attribute
+            if (use_upn) username = upn;
+
+                // trigger challenge
             otp_prov = new OTPprovider(privacyIDEAurl);
             // get a new admin token for all requests if the an admin pw is defined
             // #2
@@ -107,6 +127,7 @@ namespace privacyIDEAADFSProvider
                         admin_pw = server_config.adminpw;
                         admin_user = server_config.adminuser;
                         ssl = server_config.ssl.ToLower() == "false" ? false : true;
+                        use_upn = server_config.upn.ToLower() == "false" ? false : true;
                         privacyIDEArealm = server_config.realm;
                         privacyIDEAurl = server_config.url;
                         uidefinition = server_config.@interface;
@@ -189,7 +210,24 @@ namespace privacyIDEAADFSProvider
                 throw new ExternalAuthenticationException("Error - can't validate the otp value", authContext);
             }
         }
-       
-   
+
+        private string GetUserPrincipalName(string userName, string domain)
+        {
+            // set up domain context
+            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, domain);
+
+            // find a user
+            UserPrincipal user = UserPrincipal.FindByIdentity(ctx, userName);
+
+            if (user != null)
+            {
+               return user.UserPrincipalName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }
