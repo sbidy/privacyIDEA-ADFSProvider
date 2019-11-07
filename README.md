@@ -35,6 +35,11 @@ To contribute, please fork this repository and make pull requests to the master 
 - Don’t require a reboot (on install and uninstall)
 - Localization
 
+## Tested
+- Windows Server 2012 and R2
+- Windows Server 2016
+- Windows Server 2019 (please see the Microsoft documentaion - there are some changes to the MFA config.)
+
 ## Installation / usage
 To install the provider you have to download the pre-compiled binary (click on "[releases](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/)"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
 
