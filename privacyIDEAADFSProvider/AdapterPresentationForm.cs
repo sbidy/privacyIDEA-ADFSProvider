@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityServer.Web.Authentication.External;
+using System.Diagnostics;
 
 namespace privacyIDEAADFSProvider
 {
@@ -27,7 +28,10 @@ namespace privacyIDEAADFSProvider
             {
                 foreach (ADFSinterface adfsui in inter)
                 {
-                    if (adfsui.LICD == lcid.ToString())
+#if DEBUG
+                Debug.WriteLine("LICD: "+adfsui.LICD+" - "+ lcid.ToString());
+#endif
+                    if ((int)adfsui.LICD == (int)lcid)
                     {
                         errormessage = adfsui.errormessage;
                         wellcomemassage = adfsui.wellcomemessage;
@@ -64,7 +68,20 @@ namespace privacyIDEAADFSProvider
         //returns the title string for the web page which presents the HTML form content to the end user
         public string GetPageTitle(int lcid)
         {
-            return "privacyIDEA OTP Adapter";
+            foreach (ADFSinterface adfsui in inter)
+            {
+                if ((int)adfsui.LICD == (int)lcid)
+                {
+                    return adfsui.titel;
+                }
+                // fallback to EN-US if nothing is defined
+                else
+                {
+                    return "privacyIDEA OTP Adapter";
+                }
+            }
+            // in case of failure
+            return "privacyIDEA OTP Adapter E";
         }
 
     }
