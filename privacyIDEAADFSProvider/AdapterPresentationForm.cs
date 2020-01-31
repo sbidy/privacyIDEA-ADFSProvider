@@ -21,7 +21,7 @@ namespace privacyIDEAADFSProvider
             
             // check the localization with the lcid
             string errormessage = "";
-            string wellcomemassage = "";
+            string welcomemassage = "";
             string htmlTemplate = Resources.AuthPage; // return normal page
 
             if (inter != null)
@@ -29,29 +29,33 @@ namespace privacyIDEAADFSProvider
                 foreach (ADFSinterface adfsui in inter)
                 {
 #if DEBUG
-                Debug.WriteLine("LICD: "+adfsui.LICD+" - "+ lcid.ToString());
+                    Debug.WriteLine("ID3A_ADFSadapter: Detected language LCID:"+ lcid);
 #endif
+
                     if ((int)adfsui.LICD == (int)lcid)
                     {
                         errormessage = adfsui.errormessage;
-                        wellcomemassage = adfsui.wellcomemessage;
+                        welcomemassage = adfsui.welcomemessage;
+                        break;
                     }
                     // fallback to EN-US if nothing is defined
                     else
                     {
                         errormessage = "Login failed! Please try again!";
-                        wellcomemassage = "Please provide the one-time-password:";
+                        welcomemassage = "Please provide the one-time-password:";
                     }
                 }
             }
+            // show the error message in case of a failure
             if (error)
             {
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", errormessage);
-                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", wellcomemassage);
+                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemassage);
             }
+            // show the normal logon message
             else
             {
-                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", wellcomemassage);
+                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemassage);
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", "");
 
             }
@@ -68,16 +72,19 @@ namespace privacyIDEAADFSProvider
         //returns the title string for the web page which presents the HTML form content to the end user
         public string GetPageTitle(int lcid)
         {
-            foreach (ADFSinterface adfsui in inter)
+            if (inter != null)
             {
-                if ((int)adfsui.LICD == (int)lcid)
+                foreach (ADFSinterface adfsui in inter)
                 {
-                    return adfsui.titel;
-                }
-                // fallback to EN-US if nothing is defined
-                else
-                {
-                    return "privacyIDEA OTP Adapter";
+                    if ((int)adfsui.LICD == (int)lcid)
+                    {
+                        return adfsui.titel;
+                    }
+                    // fallback to EN-US if nothing is defined
+                    else
+                    {
+                        return "privacyIDEA OTP Adapter";
+                    }
                 }
             }
             // in case of failure

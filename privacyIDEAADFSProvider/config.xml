@@ -19,18 +19,34 @@
   <!-- UI SECTION -->
   
   <!-- 
-        For localization, please use the LCID see https://docs.microsoft.com/en-us/previous-versions/windows/embedded/ms912047(v=winembedded.10) 
-        Example: EN-US = 1033, DE-DE = 1031, FR-FR = 1036, SP-SP = 1034
+        For localization, please use this section (FR and SP are translated by google ;-) ) 
+        If you want to support a other language plase us the 1033 LICD entry - this is the fall back.
   -->
 
-  <interface LICD="1033">
+  <interface LICD="1033"> <!--EN-US-->
     <errormessage>Login failed! Please try again!</errormessage>
-    <wellcomemessage>Please provide the one-time-password:</wellcomemessage>
+    <welcomemessage>Please provide the one-time-password:</welcomemessage>
     <titel>privacyIDEA OTP Adapter - EN</titel>
   </interface>
-  <interface LICD="1031">
+  <interface LICD="2057"> <!--EN-GB-->
+    <errormessage>Login failed! Please try again!</errormessage>
+    <welcomemessage>Please provide the one-time-password:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - EN</titel>
+  </interface>
+  <interface LICD="1031"> <!-- DE-DE -->
     <errormessage>Login fehlgeschlagen. Bitte versuchen Sie es erneut!</errormessage>
-    <wellcomemessage>Bitte geben Sie ihren PIN und OTP Token ein:</wellcomemessage>
+    <welcomemessage>Bitte geben Sie ihren PIN und OTP Token ein:</welcomemessage>
     <titel>privacyIDEA OTP Adapter - DE</titel>
   </interface>
+  <interface LICD="3082"> <!-- SP-SP (int.) -->
+    <errormessage>Inicio de sesión fallido. Por favor intente de nuevo!</errormessage>
+    <welcomemessage>Ingrese su PIN y token OTP:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - ES</titel>
+  </interface>
+  <interface LICD="1036"> <!-- FR-FR -->
+    <errormessage>La connexion a échoué. Veuillez réessayer!</errormessage>
+    <welcomemessage>Veuillez entrer votre code PIN et votre jeton OTP:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - FR</titel>
+  </interface>
+
 </server>

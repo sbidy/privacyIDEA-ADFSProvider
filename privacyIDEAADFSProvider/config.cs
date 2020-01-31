@@ -141,7 +141,7 @@ namespace privacyIDEAADFSProvider
     {
 
         private string errormessageField;
-        private string wellcomemessageField;
+        private string welcomemessageField;
         private int lICDField;
         private string titelField;
 
@@ -161,15 +161,15 @@ namespace privacyIDEAADFSProvider
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string wellcomemessage
+        public string welcomemessage
         {
             get
             {
-                return this.wellcomemessageField;
+                return this.welcomemessageField;
             }
             set
             {
-                this.wellcomemessageField = value;
+                this.welcomemessageField = value;
             }
         }
         /// <remarks/>
