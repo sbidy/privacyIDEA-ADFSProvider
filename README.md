@@ -1,7 +1,11 @@
-# Version 1.3.5
+## Version 1.3.6 (current)
+  - Change support for different languages - the provider supports FR, ES, DE, EN (US & GB)
+  - The HTML title field can also now changed
+
+## Version 1.3.5
   - Now UPNs can be used as Loginname Attribute. See the UPN-Parameter in the config.ini. Default is SAMaccountName. 
 
-## Version 1.3.4 (stable)
+## Version 1.3.4 
   - Bug fixes for #14, #15 and #19 - authContext now used
   - Please use the new PowerShell installer for 1.3.4 !!
   - EventLog implemented for error handling. See in the Applications and Service Logs -> AD FS -> Admin
