@@ -19,7 +19,7 @@ namespace privacyIDEAADFSProvider {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -67,8 +67,8 @@ namespace privacyIDEAADFSProvider {
         ///        &lt;input id=&quot;authMethod&quot; type=&quot;hidden&quot; name=&quot;AuthMethod&quot; value=&quot;%AuthMethod%&quot; /&gt;
         ///        &lt;input id=&quot;context&quot; type=&quot;hidden&quot; name=&quot;Context&quot; value=&quot;%Context%&quot; /&gt;
         ///        &lt;!-- End inputs are required by the presentation framework. --&gt;
-        ///        &lt;p id=&quot;pageIntroductionText&quot; style=&quot;color:red&quot;&gt; Wrong One-Time-Password. Please try again!&lt;/p&gt;
-        ///       [rest of string was truncated]&quot;;.
+        ///        &lt;!-- Inputs for session affinity - Do not modify or remove - See #14 --&gt;
+        ///        &lt;input id=&quot;username&quot; [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string AuthError {
             get {

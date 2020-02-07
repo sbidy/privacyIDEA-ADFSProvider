@@ -38,7 +38,7 @@ if (!([System.Diagnostics.EventLog]::SourceExists("privacyIDEAProvider")))
 Set-location "C:\Program Files\privacyIDEAProvider"
 Gac-Util "C:\Program Files\privacyIDEAProvider\privacyIDEA-ADFSProvider.dll"
 
-$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.3.5.0, Culture=neutral, PublicKeyToken=bf6bdb60967d5ecc"
+$typeName = "privacyIDEAADFSProvider.Adapter, privacyIDEA-ADFSProvider, Version=1.3.6.0, Culture=neutral, PublicKeyToken=bf6bdb60967d5ecc"
 Register-AdfsAuthenticationProvider -TypeName $typeName -Name "privacyIDEA-ADFSProvider" -ConfigurationFilePath "C:\Program Files\privacyIDEAProvider\config.xml" -Verbose
 
 Restart-Service adfssrv

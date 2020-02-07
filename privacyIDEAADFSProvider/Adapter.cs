@@ -9,6 +9,7 @@ using System.DirectoryServices.AccountManagement;
 
 // old b6483f285cb7b6eb
 // new bf6bdb60967d5ecc 1.3.2
+// new 
 
 namespace privacyIDEAADFSProvider
 {

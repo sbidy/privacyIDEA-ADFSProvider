@@ -7,7 +7,8 @@ namespace privacyIDEAADFSProvider
     {
         public ADFSinterface[] inter;
         private bool error = false;
-        
+
+
         public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
         {
             this.error = error;
