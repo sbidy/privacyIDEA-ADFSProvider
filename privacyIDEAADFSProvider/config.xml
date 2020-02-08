@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <server>
   <!-- Server configuration for the privacyIDEA system -->
-  <url>https://192.168.230.126</url>
+  <url>https://your.server</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
   <realm>adfs</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
@@ -47,6 +47,11 @@
     <errormessage>La connexion a échoué. Veuillez réessayer!</errormessage>
     <welcomemessage>Veuillez entrer votre code PIN et votre jeton OTP:</welcomemessage>
     <titel>privacyIDEA OTP Adapter - FR</titel>
+  </interface>
+  <interface LICD="1058"> <!-- UA-UA -->
+    <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
+    <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - UA</titel>
   </interface>
 
 </server>
