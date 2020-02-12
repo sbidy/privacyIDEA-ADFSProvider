@@ -34,7 +34,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>privacyIDEAADFSProvider.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>VSCode.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.IdentityServer.Web">
@@ -77,7 +77,7 @@
     <None Include="config.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="privacyIDEAADFSProvider.pfx" />
+    <None Include="VSCode.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Install\Install-ADFSProvider.ps1" />

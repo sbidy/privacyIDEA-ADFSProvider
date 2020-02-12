@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <server>
   <!-- Server configuration for the privacyIDEA system -->
-  <url>https://your.server</url>
+  <url>https://mfa.fraglab.com</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
-  <realm>adfs</realm>
+  <realm>users</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
   <ssl>false</ssl>
   <!-- use UPN as Loginname Attribute / false = sAMAccountName will be used -->
@@ -48,10 +48,25 @@
     <welcomemessage>Veuillez entrer votre code PIN et votre jeton OTP:</welcomemessage>
     <titel>privacyIDEA OTP Adapter - FR</titel>
   </interface>
-  <interface LICD="1058"> <!-- UA-UA -->
+  <interface LICD="1058"> <!-- uk-UA -->
     <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
     <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
     <titel>privacyIDEA OTP Adapter - UA</titel>
+  </interface>
+  <interface LICD="34"> <!-- uk -->
+    <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
+    <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - UA</titel>
+  </interface>
+  <interface LICD="1049"> <!-- ru-RU -->
+    <errormessage>Ошибка входа. Попробуй снова!</errormessage>
+    <welcomemessage>Введи одноразовый пароль:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - RU</titel>
+  </interface>
+  <interface LICD="25"> <!-- ru -->
+    <errormessage>Ошибка входа. Попробуй снова!</errormessage>
+    <welcomemessage>Введи одноразовый пароль:</welcomemessage>
+    <titel>privacyIDEA OTP Adapter - RU</titel>
   </interface>
 
 </server>
