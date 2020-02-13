@@ -77,5 +77,18 @@
     <submittext>Подтвердить</submittext>
     <titel>privacyIDEA OTP Adapter - RU</titel>
   </interface>
+  <interface LICD="1059"> <!-- be-BY -->
+    <errormessage>Памылка ўваходу. Паспрабуй зноў!</errormessage>
+    <welcomemessage>Віншую, сябар! Увядзі аднаразовы пароль:</welcomemessage>
+    <submittext>Пацвердзіць</submittext>
+    <titel>privacyIDEA OTP Adapter - BE</titel>
+  </interface>
+  <interface LICD="35"> <!-- be -->
+    <errormessage>Памылка ўваходу. Паспрабуй зноў!</errormessage>
+    <welcomemessage>Віншую, сябар! Увядзі аднаразовы пароль:</welcomemessage>
+    <submittext>Пацвердзіць</submittext>
+    <titel>privacyIDEA OTP Adapter - BE</titel>
+  </interface>
+
 
 </server>
