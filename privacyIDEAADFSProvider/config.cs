@@ -142,6 +142,7 @@ namespace privacyIDEAADFSProvider
 
         private string errormessageField;
         private string welcomemessageField;
+        private string submittextField;
         private int lICDField;
         private string titelField;
 
@@ -172,6 +173,22 @@ namespace privacyIDEAADFSProvider
                 this.welcomemessageField = value;
             }
         }
+
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string submittext
+        {
+            get
+            {
+                return this.submittextField;
+            }
+            set
+            {
+                this.submittextField = value;
+            }
+        }
+
+        /// <remarks/>
+
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string titel

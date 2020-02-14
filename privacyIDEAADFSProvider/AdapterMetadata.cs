@@ -28,7 +28,18 @@ namespace privacyIDEAADFSProvider
         {
             get
             {
-                return new[] { new CultureInfo("en-us").LCID, new CultureInfo("de-de").LCID, new CultureInfo("es-ES").LCID, new CultureInfo("en-GB").LCID, new CultureInfo("fr-FR").LCID };
+                return new[] { 
+                    new CultureInfo("en-us").LCID,
+                    new CultureInfo("de-de").LCID,
+                    new CultureInfo("es-ES").LCID,
+                    new CultureInfo("en-GB").LCID,
+                    new CultureInfo("fr-FR").LCID,
+                    new CultureInfo("uk-UA").LCID,
+                    new CultureInfo("uk").LCID,
+                    new CultureInfo("ru").LCID,
+                    new CultureInfo("be").LCID,
+                    new CultureInfo("be-BY").LCID
+                    };
             }
         }
 
@@ -45,6 +56,11 @@ namespace privacyIDEAADFSProvider
                 _friendlyNames.Add(new CultureInfo("de-de").LCID, "privacyIDEA ADFS Authentikationsprovider");
                 _friendlyNames.Add(new CultureInfo("es-ES").LCID, "privacyIDEA ADFS authentication provider");
                 _friendlyNames.Add(new CultureInfo("fr-FR").LCID, "privacyIDEA ADFS authentication provider");
+                _friendlyNames.Add(new CultureInfo("uk-UA").LCID, "privacyIDEA ADFS authentication provider");
+                _friendlyNames.Add(new CultureInfo("uk").LCID, "privacyIDEA ADFS authentication provider");
+                _friendlyNames.Add(new CultureInfo("ru").LCID, "privacyIDEA ADFS authentication provider");
+                _friendlyNames.Add(new CultureInfo("be").LCID, "privacyIDEA ADFS authentication provider");
+                _friendlyNames.Add(new CultureInfo("be-BY").LCID, "privacyIDEA ADFS authentication provider");
                 return _friendlyNames;
             }
         }
@@ -62,7 +78,11 @@ namespace privacyIDEAADFSProvider
                 _descriptions.Add(new CultureInfo("fr-FR").LCID, "privacyIDEA ADFS Provider zur Bedienung der API.");
                 _descriptions.Add(new CultureInfo("es-ES").LCID, "privacyIDEA ADFS provider to access the api");
                 _descriptions.Add(new CultureInfo("de-de").LCID, "privacyIDEA ADFS Provider zur Bedienung der API.");
-
+                _descriptions.Add(new CultureInfo("uk-UA").LCID, "privacyIDEA ADFS provider to access the api");
+                _descriptions.Add(new CultureInfo("uk").LCID, "privacyIDEA ADFS provider to access the api");
+                _descriptions.Add(new CultureInfo("ru").LCID, "privacyIDEA ADFS provider to access the api");
+                _descriptions.Add(new CultureInfo("be").LCID, "privacyIDEA ADFS provider to access the api");
+                _descriptions.Add(new CultureInfo("be-BY").LCID, "privacyIDEA ADFS provider to access the api");
                 return _descriptions;
             }
         }

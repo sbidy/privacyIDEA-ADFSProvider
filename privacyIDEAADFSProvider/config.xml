@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <server>
   <!-- Server configuration for the privacyIDEA system -->
-  <url>https://192.168.230.126</url>
+  <url>https://mfa.fraglab.com</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
-  <realm>adfs</realm>
+  <realm>users</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
   <ssl>false</ssl>
   <!-- use UPN as Loginname Attribute / false = sAMAccountName will be used -->
@@ -26,27 +26,69 @@
   <interface LICD="1033"> <!--EN-US-->
     <errormessage>Login failed! Please try again!</errormessage>
     <welcomemessage>Please provide the one-time-password:</welcomemessage>
+    <submittext>Submit</submittext>
     <titel>privacyIDEA OTP Adapter - EN</titel>
   </interface>
   <interface LICD="2057"> <!--EN-GB-->
     <errormessage>Login failed! Please try again!</errormessage>
     <welcomemessage>Please provide the one-time-password:</welcomemessage>
+    <submittext>Submit</submittext>
     <titel>privacyIDEA OTP Adapter - EN</titel>
   </interface>
   <interface LICD="1031"> <!-- DE-DE -->
     <errormessage>Login fehlgeschlagen. Bitte versuchen Sie es erneut!</errormessage>
     <welcomemessage>Bitte geben Sie ihren PIN und OTP Token ein:</welcomemessage>
+    <submittext>Submit</submittext>
     <titel>privacyIDEA OTP Adapter - DE</titel>
   </interface>
   <interface LICD="3082"> <!-- SP-SP (int.) -->
     <errormessage>Inicio de sesión fallido. Por favor intente de nuevo!</errormessage>
     <welcomemessage>Ingrese su PIN y token OTP:</welcomemessage>
+    <submittext>Submit</submittext>
     <titel>privacyIDEA OTP Adapter - ES</titel>
   </interface>
   <interface LICD="1036"> <!-- FR-FR -->
     <errormessage>La connexion a échoué. Veuillez réessayer!</errormessage>
     <welcomemessage>Veuillez entrer votre code PIN et votre jeton OTP:</welcomemessage>
+    <submittext>Submit</submittext>
     <titel>privacyIDEA OTP Adapter - FR</titel>
   </interface>
+  <interface LICD="1058"> <!-- uk-UA -->
+    <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
+    <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
+    <submittext>Підтвердити</submittext> 
+   <titel>privacyIDEA OTP Adapter - UA</titel>
+  </interface>
+  <interface LICD="34"> <!-- uk -->
+    <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
+    <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
+    <submittext>Підтвердити</submittext>
+    <titel>privacyIDEA OTP Adapter - UA</titel>
+  </interface>
+  <interface LICD="1049"> <!-- ru-RU -->
+    <errormessage>Ошибка входа. Попробуй снова!</errormessage>
+    <welcomemessage>Введи одноразовый пароль:</welcomemessage>
+    <submittext>Подтвердить</submittext>
+    <titel>privacyIDEA OTP Adapter - RU</titel>
+  </interface>
+  <interface LICD="25"> <!-- ru -->
+    <errormessage>Ошибка входа. Попробуй снова!</errormessage>
+    <welcomemessage>Введи одноразовый пароль:</welcomemessage>
+    <submittext>Подтвердить</submittext>
+    <titel>privacyIDEA OTP Adapter - RU</titel>
+  </interface>
+  <interface LICD="1059"> <!-- be-BY -->
+    <errormessage>Памылка ўваходу. Паспрабуй зноў!</errormessage>
+    <welcomemessage>Віншую, сябар! Увядзі аднаразовы пароль:</welcomemessage>
+    <submittext>Пацвердзіць</submittext>
+    <titel>privacyIDEA OTP Adapter - BE</titel>
+  </interface>
+  <interface LICD="35"> <!-- be -->
+    <errormessage>Памылка ўваходу. Паспрабуй зноў!</errormessage>
+    <welcomemessage>Віншую, сябар! Увядзі аднаразовы пароль:</welcomemessage>
+    <submittext>Пацвердзіць</submittext>
+    <titel>privacyIDEA OTP Adapter - BE</titel>
+  </interface>
+
 
 </server>
