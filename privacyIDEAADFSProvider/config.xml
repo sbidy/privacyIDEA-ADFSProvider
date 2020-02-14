@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <server>
   <!-- Server configuration for the privacyIDEA system -->
-  <url>https://mfa.fraglab.com</url>
+  <url>https://192.168.0.0</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
   <realm>users</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
-  <ssl>false</ssl>
-  <!-- use UPN as Loginname Attribute / false = sAMAccountName will be used -->
-  <upn>false</upn>
+  <ssl>true</ssl>
+  <!-- true = use UPN as Loginname Attribute / false = sAMAccountName will be used -->
+  <upn>true</upn>
   <!-- 
       Provide a administrative user and password for the API.
       Only needed if a challenge must be triggered (e.g. Email or SMS token)!
