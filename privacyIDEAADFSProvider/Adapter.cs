@@ -34,6 +34,7 @@ namespace privacyIDEAADFSProvider
             //get { return new <instance of IAuthenticationAdapterMetadata derived class>; }
             get {
                 AdapterMetadata meta = new AdapterMetadata();
+                meta.AdapterMetadataInit(uidefinition);
                 meta.adapterversion = version;
                 return meta;
             }

@@ -142,9 +142,12 @@ namespace privacyIDEAADFSProvider
 
         private string errormessageField;
         private string welcomemessageField;
+        private string otptextField;
         private string submittextField;
-        private int lICDField;
-        private string titelField;
+        private string friendlynameField;
+        private string descriptionField;
+        private int LCIDField;
+        private string titleField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -174,6 +177,21 @@ namespace privacyIDEAADFSProvider
             }
         }
 
+
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string otptext
+        {
+            get
+            {
+                return this.otptextField;
+            }
+            set
+            {
+                this.otptextField = value;
+            }
+        }
+
+
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string submittext
         {
@@ -187,33 +205,58 @@ namespace privacyIDEAADFSProvider
             }
         }
 
-        /// <remarks/>
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string titel
+        public string friendlyname
         {
             get
             {
-                return this.titelField;
+                return this.friendlynameField;
             }
             set
             {
-                this.titelField = value;
+                this.friendlynameField = value;
+            }
+        }
+
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string description
+        {
+            get
+            {
+                return this.descriptionField;
+            }
+            set
+            {
+                this.descriptionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string title
+        {
+            get
+            {
+                return this.titleField;
+            }
+            set
+            {
+                this.titleField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int LICD
+        public int LCID
         {
             get
             {
-                return this.lICDField;
+                return this.LCIDField;
             }
             set
             {
-                this.lICDField = value;
+                this.LCIDField = value;
             }
         }
     }
