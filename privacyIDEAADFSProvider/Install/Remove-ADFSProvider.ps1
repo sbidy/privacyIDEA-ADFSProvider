@@ -1,4 +1,5 @@
-﻿# Remove the provider
+﻿#Requires -RunAsAdministrator
+# Remove the provider
 
 $myPath = Get-Location
 $myDll = 'privacyIDEA-ADFSProvider.dll'

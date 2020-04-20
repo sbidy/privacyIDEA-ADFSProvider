@@ -1,3 +1,4 @@
+#Requires -RunAsAdministrator
 # Install the provider
 
 $myPath = Get-Location
