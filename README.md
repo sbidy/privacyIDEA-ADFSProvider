@@ -47,6 +47,11 @@ To contribute, please fork this repository and make pull requests to the master 
 - Windows Server 2016
 - Windows Server 2019 (please see the Microsoft documentaion - there are some changes to the MFA config.)
 
+### Windows Server 2019
+If you use a Windows Server 2019 please activate TLS 1.x for your .NET becasue TLS 1.0 is deprectade.
+Adding `"SchUseStrongCrypto"=dword:00000001` to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft.NETFramework\v4.0.30319`
+and `HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft.NETFramework\v4.0.30319` fixes the problem (see Issue #32).
+
 ## Installation / usage
 To install the provider you have to download the pre-compiled binary (click on "[releases](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/)"), add some information to the config.xml and run the PowerShell script at the ADFS server. Now you can use the privacyIDEA-ADFSPovider at the pre-authentication options in the ADFS settings menu.
 
