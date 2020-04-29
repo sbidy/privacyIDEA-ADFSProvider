@@ -91,5 +91,24 @@ namespace privacyIDEAADFSProvider {
                 return ResourceManager.GetString("AuthPage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;xs:schema attributeFormDefault=&quot;unqualified&quot; elementFormDefault=&quot;qualified&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot;&gt;
+        ///  &lt;xs:element name=&quot;server&quot;&gt;
+        ///    &lt;xs:complexType&gt;
+        ///      &lt;xs:sequence&gt;
+        ///        &lt;xs:element name=&quot;url&quot; type=&quot;xs:string&quot; /&gt;
+        ///        &lt;xs:element name=&quot;realm&quot; type=&quot;xs:string&quot; /&gt;
+        ///        &lt;xs:element name=&quot;ssl&quot; type=&quot;xs:boolean&quot; /&gt;
+        ///        &lt;xs:element name=&quot;upn&quot; type=&quot;xs:boolean&quot; /&gt;
+        ///        &lt;xs:element name=&quot;adminuser&quot; type=&quot;xs:string&quot; /&gt;
+        ///       [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string config {
+            get {
+                return ResourceManager.GetString("config", resourceCulture);
+            }
+        }
     }
 }

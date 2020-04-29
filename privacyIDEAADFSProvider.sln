@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "privacyIDEAADFSProvider", "privacyIDEAADFSProvider\privacyIDEAADFSProvider.csproj", "{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "privacyIDEA-ADFSProvider_Setup", "privacyIDEA-ADFSProvider_Setup\privacyIDEA-ADFSProvider_Setup.vdproj", "{D0CF5FF0-6FF0-4603-A894-50E3A708222B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,13 @@ Global
 		{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0CF5FF0-6FF0-4603-A894-50E3A708222B}.Debug|Any CPU.ActiveCfg = Debug
+		{D0CF5FF0-6FF0-4603-A894-50E3A708222B}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FE969C8-FC93-421E-9F7A-D5C463DF71BE}
 	EndGlobalSection
 EndGlobal

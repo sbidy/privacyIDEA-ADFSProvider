@@ -13,14 +13,14 @@
       Only needed if a challenge must be triggered (e.g. Email or SMS token)!
       If not -> left blank.
   -->
-  <adminuser></adminuser>
-  <adminpw></adminpw>
+  <adminuser>Username</adminuser>
+  <adminpw>Password1234@</adminpw>
 
   <!-- UI SECTION -->
   
   <!-- 
         For localization, please use this section (FR and SP are translated by google ;-) ) 
-        If you want to support a other language plase us the 1033 LCID entry - this is the fall back.
+        See https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/ for LCID list
   -->
 
   <interface LCID="1033"> <!--EN-US-->

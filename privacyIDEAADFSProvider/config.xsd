@@ -1,34 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="server">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="url" type="xs:string" minOccurs="0" />
-        <xs:element name="realm" type="xs:string" minOccurs="0" />
-        <xs:element name="ssl" type="xs:string" minOccurs="0" />
-        <xs:element name="adminuser" type="xs:string" minOccurs="0" />
-        <xs:element name="adminpw" type="xs:string" minOccurs="0" />
-        <xs:element name="interface" minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="url" type="xs:string" />
+        <xs:element name="realm" type="xs:string" />
+        <xs:element name="ssl" type="xs:boolean" />
+        <xs:element name="upn" type="xs:boolean" />
+        <xs:element name="adminuser" type="xs:string" />
+        <xs:element name="adminpw" type="xs:string" />
+        <xs:element maxOccurs="unbounded" name="interface" minOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="errormessage" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
-              <xs:element name="welcomemessage" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
-              <xs:element name="otptext" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
-              <xs:element name="submittext" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
-              <xs:element name="friendlyname" type="xs:string" minOccurs="0" msdata:Ordinal="4" />
-              <xs:element name="description" type="xs:string" minOccurs="0" msdata:Ordinal="5" />
+              <xs:element name="errormessage" type="xs:string" />
+              <xs:element name="welcomemessage" type="xs:string" />
+              <xs:element name="otptext" type="xs:string" />
+              <xs:element name="submittext" type="xs:string" />
+              <xs:element name="friendlyname" type="xs:string" />
+              <xs:element name="description" type="xs:string" />
+              <xs:element name="title" type="xs:string" />
             </xs:sequence>
-            <xs:attribute name="LCID" type="xs:string" />
+            <xs:attribute name="LCID" type="xs:unsignedShort" use="required" />
           </xs:complexType>
         </xs:element>
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
-    <xs:complexType>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="server" />
-      </xs:choice>
     </xs:complexType>
   </xs:element>
 </xs:schema>
