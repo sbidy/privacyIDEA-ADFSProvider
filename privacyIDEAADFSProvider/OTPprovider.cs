@@ -107,7 +107,7 @@ namespace privacyIDEAADFSProvider
                     client.UploadValues(URL + "/validate/triggerchallenge", new NameValueCollection()
                     {
                            { "user", OTPuser},
-                           { "realm ", realm},
+                           { "realm", realm},
                     });
                     responseString = Encoding.UTF8.GetString(response);
                     // get transaction id from response
