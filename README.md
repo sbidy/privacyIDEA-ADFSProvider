@@ -3,8 +3,10 @@
   - "Submit" button also customizable
   - Fix Bug for #39 - thank you again @Webserve
   - Some other improvements
-  PLEASE update the config.xml! You can use your old config file but you will miss some cool new features! Please migrate!
-  DON'T use the DEBUG version in your production enviromen!
+  
+PLEASE update the config.xml! You can use your old config file but you will miss some cool new features! Please migrate!
+
+DON'T use the DEBUG version in your production environment!
 
 ## Version 1.3.6
   - Change support for different languages - the provider supports FR, ES, DE, EN (US & GB)
