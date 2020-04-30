@@ -1,4 +1,4 @@
-## Version 1.3.7 (30.04.2020 // Current)
+## [Version 1.3.7 (30.04.2020 // Current)](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/tag/1.3.7)
   - Add support for more languages and also a dynamic bindings (thanks to @jinshin and @Webserve)
   - "Submit" button also customizable
   - BugFix for #39 - thank you again @Webserve
