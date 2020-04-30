@@ -4,7 +4,7 @@
   <url>https://192.168.0.0</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
   <realm>users</realm>
-  <!-- false = ssl cert check disable / true = ssl cert check enabled -->
+  <!-- false = ssl cert check disable / true = ssl cert check enabled (should be used in production environnements) -->
   <ssl>true</ssl>
   <!-- true = use UPN as Loginname Attribute / false = sAMAccountName will be used -->
   <upn>true</upn>
@@ -22,7 +22,7 @@
         For localization, please use this section (FR and SP are translated by google ;-) ) 
         See https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/ for LCID list
   -->
-
+ 
   <interface LCID="1033"> <!--EN-US-->
     <errormessage>Login failed! Please try again!</errormessage>
     <welcomemessage>Please provide the one-time-password:</welcomemessage>
