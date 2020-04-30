@@ -72,6 +72,16 @@
     <description>privacyIDEA ADFS provider to access the api</description>
     <title>privacyIDEA OTP Adapter - FR</title>
   </interface>
+  
+  <interface LCID="1043"> <!-- nl-NL - thx to @Webserve-->
+    <errormessage>Inloggen mislukt! Probeer het opnieuw!</errormessage>
+    <welcomemessage>Voer uw eenmalige code in:</welcomemessage>
+    <otptext>OTP Token</otptext>
+    <submittext>Submit</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider om de API te bedienen</description>
+    <title>privacyIDEA OTP Adapter - NL</title>
+  </interface>
 
   <interface LCID="1058"> <!-- uk-UA -->
     <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
