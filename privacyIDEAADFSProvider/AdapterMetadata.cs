@@ -7,6 +7,14 @@ namespace privacyIDEAADFSProvider
     class AdapterMetadata : IAuthenticationAdapterMetadata
     {
         public string adapterversion { get; set; }
+
+        public ADFSinterface[] inter;
+
+        public void AdapterMetadataInit(ADFSinterface[] adfsinter)
+        {
+            this.inter = adfsinter;
+        }
+
         //Returns the name of the provider that will be shown in the AD FS management UI (not visible to end users)
         public string AdminName
         {
@@ -28,7 +36,20 @@ namespace privacyIDEAADFSProvider
         {
             get
             {
-                return new[] { new CultureInfo("en-us").LCID, new CultureInfo("de-de").LCID, new CultureInfo("es-ES").LCID, new CultureInfo("en-GB").LCID, new CultureInfo("fr-FR").LCID };
+                List<int> LCIDS = new List<int>();
+                bool HasDefault = false;
+                if (inter != null)
+                {
+                    foreach (ADFSinterface adfsui in inter)
+                    {
+                        LCIDS.Add(adfsui.LCID);
+                        if (adfsui.LCID == 1033) HasDefault = true;
+                    }
+                } 
+                //Fallback and fixup
+                if ((LCIDS.Count == 0) | (!HasDefault)) 
+                    LCIDS.Add(1033);
+                return LCIDS.ToArray();
             }
         }
 
@@ -40,11 +61,19 @@ namespace privacyIDEAADFSProvider
             get
             {
                 Dictionary<int, string> _friendlyNames = new Dictionary<int, string>();
-                _friendlyNames.Add(new CultureInfo("en-us").LCID, "privacyIDEA ADFS authentication provider");
-                _friendlyNames.Add(new CultureInfo("en-GB").LCID, "privacyIDEA ADFS authentication provider");
-                _friendlyNames.Add(new CultureInfo("de-de").LCID, "privacyIDEA ADFS Authentikationsprovider");
-                _friendlyNames.Add(new CultureInfo("es-ES").LCID, "privacyIDEA ADFS authentication provider");
-                _friendlyNames.Add(new CultureInfo("fr-FR").LCID, "privacyIDEA ADFS authentication provider");
+                bool HasDefault = false;
+                if (inter != null)
+                {
+                    foreach (ADFSinterface adfsui in inter)
+                    {
+                        _friendlyNames.Add(adfsui.LCID, adfsui.friendlyname);
+                        if (adfsui.LCID == 1033) HasDefault = true;
+                    }
+                }
+                
+                if ((_friendlyNames.Count == 0)|(!HasDefault)) 
+                    _friendlyNames.Add(1033, "privacyIDEA ADFS authentication provider");
+                
                 return _friendlyNames;
             }
         }
@@ -57,12 +86,17 @@ namespace privacyIDEAADFSProvider
             get
             {
                 Dictionary<int, string> _descriptions = new Dictionary<int, string>();
-                _descriptions.Add(new CultureInfo("en-us").LCID, "privacyIDEA ADFS provider to access the api");
-                _descriptions.Add(new CultureInfo("en-GB").LCID, "privacyIDEA ADFS provider to access the api");
-                _descriptions.Add(new CultureInfo("fr-FR").LCID, "privacyIDEA ADFS Provider zur Bedienung der API.");
-                _descriptions.Add(new CultureInfo("es-ES").LCID, "privacyIDEA ADFS provider to access the api");
-                _descriptions.Add(new CultureInfo("de-de").LCID, "privacyIDEA ADFS Provider zur Bedienung der API.");
-
+                bool HasDefault = false;
+                if (inter != null)
+                {
+                    foreach (ADFSinterface adfsui in inter)
+                    {
+                        _descriptions.Add(adfsui.LCID, adfsui.description);
+                        if (adfsui.LCID == 1033) HasDefault = true;
+                    }
+                }
+                if ((_descriptions.Count == 0)|(!HasDefault))
+                    _descriptions.Add(1033, "privacyIDEA ADFS provider to access the api");
                 return _descriptions;
             }
         }

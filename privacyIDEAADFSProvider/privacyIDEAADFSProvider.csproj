@@ -39,6 +39,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.IdentityServer.Web">
       <HintPath>.\Microsoft.IdentityServer.Web.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,12 +77,26 @@
     <Content Include="AuthPage.html" />
     <None Include="config.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Install\remove.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="privacyIDEAADFSProvider.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Install\Install-ADFSProvider.ps1" />
-    <None Include="Install\Remove-ADFSProvider.ps1" />
+    <None Include="Install\Install-ADFSProvider.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Install\install.cmd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Install\Remove-ADFSProvider.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

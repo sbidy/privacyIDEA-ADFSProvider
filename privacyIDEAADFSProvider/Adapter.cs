@@ -6,6 +6,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Xml.Serialization;
 using System.DirectoryServices.AccountManagement;
+using System;
 
 // old b6483f285cb7b6eb
 // new bf6bdb60967d5ecc 1.3.2
@@ -34,6 +35,7 @@ namespace privacyIDEAADFSProvider
             //get { return new <instance of IAuthenticationAdapterMetadata derived class>; }
             get {
                 AdapterMetadata meta = new AdapterMetadata();
+                meta.AdapterMetadataInit(uidefinition);
                 meta.adapterversion = version;
                 return meta;
             }
@@ -114,24 +116,31 @@ namespace privacyIDEAADFSProvider
             {
                 if (configData.Data != null)
                 {
-                    // load the config file
-                    // TODO: Handle errors and exceptions
-                    using (StreamReader reader = new StreamReader(configData.Data, Encoding.UTF8))
+                    try
                     {
-                        XmlRootAttribute xRoot = new XmlRootAttribute
+                        // load the config file
+                        // TODO: Handle errors and exceptions
+                        using (StreamReader reader = new StreamReader(configData.Data, Encoding.UTF8))
                         {
-                            ElementName = "server",
-                            IsNullable = true
-                        };
-                        XmlSerializer serializer = new XmlSerializer(typeof(ADFSserver), xRoot);
-                        ADFSserver server_config = (ADFSserver)serializer.Deserialize(reader);
-                        admin_pw = server_config.adminpw;
-                        admin_user = server_config.adminuser;
-                        ssl = server_config.ssl.ToLower() == "false" ? false : true;
-                        use_upn = server_config.upn.ToLower() == "false" ? false : true;
-                        privacyIDEArealm = server_config.realm;
-                        privacyIDEAurl = server_config.url;
-                        uidefinition = server_config.@interface;
+                            XmlRootAttribute xRoot = new XmlRootAttribute
+                            {
+                                ElementName = "server",
+                                IsNullable = true
+                            };
+                            XmlSerializer serializer = new XmlSerializer(typeof(ADFSserver), xRoot);
+                            ADFSserver server_config = (ADFSserver)serializer.Deserialize(reader);
+                            admin_pw = server_config.adminpw;
+                            admin_user = server_config.adminuser;
+                            ssl = server_config.ssl.ToLower() == "false" ? false : true;
+                            use_upn = server_config.upn.ToLower() == "false" ? false : true;
+                            privacyIDEArealm = server_config.realm;
+                            privacyIDEAurl = server_config.url;
+                            uidefinition = server_config.@interface;
+                        }
+                    }
+                    catch
+                    {
+                        throw new Exception("Config cant be validated!");
                     }
                 }
             }

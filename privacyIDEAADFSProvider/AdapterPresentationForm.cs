@@ -21,8 +21,10 @@ namespace privacyIDEAADFSProvider
         {
             
             // check the localization with the lcid
-            string errormessage = "";
-            string welcomemassage = "";
+            string errormessage = "Login failed! Please try again!";
+            string welcomemessage = "Please provide the one-time-password:";
+            string otptext = "OTP Token";
+            string submittext = "Submit";
             string htmlTemplate = Resources.AuthPage; // return normal page
 
             if (inter != null)
@@ -33,17 +35,13 @@ namespace privacyIDEAADFSProvider
                     Debug.WriteLine("ID3A_ADFSadapter: Detected language LCID:"+ lcid);
 #endif
 
-                    if ((int)adfsui.LICD == (int)lcid)
+                    if ((int)adfsui.LCID == (int)lcid)
                     {
-                        errormessage = adfsui.errormessage;
-                        welcomemassage = adfsui.welcomemessage;
+                        if (!string.IsNullOrEmpty(adfsui.errormessage)) errormessage = adfsui.errormessage;
+                        if (!string.IsNullOrEmpty(adfsui.welcomemessage)) welcomemessage = adfsui.welcomemessage;
+                        if (!string.IsNullOrEmpty(adfsui.otptext)) otptext = adfsui.otptext;
+                        if (!string.IsNullOrEmpty(adfsui.submittext)) submittext = adfsui.submittext;
                         break;
-                    }
-                    // fallback to EN-US if nothing is defined
-                    else
-                    {
-                        errormessage = "Login failed! Please try again!";
-                        welcomemassage = "Please provide the one-time-password:";
                     }
                 }
             }
@@ -51,14 +49,17 @@ namespace privacyIDEAADFSProvider
             if (error)
             {
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", errormessage);
-                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemassage);
+                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemessage);
+                htmlTemplate = htmlTemplate.Replace("#OTPTEXT#", otptext);
+                htmlTemplate = htmlTemplate.Replace("#SUBMIT#", submittext);
             }
             // show the normal logon message
             else
             {
-                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemassage);
+                htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemessage);
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", "");
-
+                htmlTemplate = htmlTemplate.Replace("#OTPTEXT#", otptext);
+                htmlTemplate = htmlTemplate.Replace("#SUBMIT#", submittext);
             }
             return htmlTemplate;
         }
@@ -77,9 +78,9 @@ namespace privacyIDEAADFSProvider
             {
                 foreach (ADFSinterface adfsui in inter)
                 {
-                    if ((int)adfsui.LICD == (int)lcid)
+                    if ((int)adfsui.LCID == (int)lcid)
                     {
-                        return adfsui.titel;
+                        return adfsui.title;
                     }
                     // fallback to EN-US if nothing is defined
                     else

@@ -1,52 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <server>
   <!-- Server configuration for the privacyIDEA system -->
-  <url>https://192.168.230.126</url>
+  <url>https://192.168.0.0</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
-  <realm>adfs</realm>
+  <realm>users</realm>
   <!-- false = ssl cert check disable / true = ssl cert check enabled -->
-  <ssl>false</ssl>
-  <!-- use UPN as Loginname Attribute / false = sAMAccountName will be used -->
-  <upn>false</upn>
+  <ssl>true</ssl>
+  <!-- true = use UPN as Loginname Attribute / false = sAMAccountName will be used -->
+  <upn>true</upn>
   <!-- 
       Provide a administrative user and password for the API.
       Only needed if a challenge must be triggered (e.g. Email or SMS token)!
       If not -> left blank.
   -->
-  <adminuser></adminuser>
-  <adminpw></adminpw>
+  <adminuser>Username</adminuser>
+  <adminpw>Password1234@</adminpw>
 
   <!-- UI SECTION -->
   
   <!-- 
         For localization, please use this section (FR and SP are translated by google ;-) ) 
-        If you want to support a other language plase us the 1033 LICD entry - this is the fall back.
+        See https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/ for LCID list
   -->
 
-  <interface LICD="1033"> <!--EN-US-->
+  <interface LCID="1033"> <!--EN-US-->
     <errormessage>Login failed! Please try again!</errormessage>
     <welcomemessage>Please provide the one-time-password:</welcomemessage>
-    <titel>privacyIDEA OTP Adapter - EN</titel>
+    <otptext>OTP Token</otptext>
+    <submittext>Submit</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+    <title>privacyIDEA OTP Adapter - EN</title>
   </interface>
-  <interface LICD="2057"> <!--EN-GB-->
+
+  <interface LCID="2057"> <!--EN-GB-->
     <errormessage>Login failed! Please try again!</errormessage>
     <welcomemessage>Please provide the one-time-password:</welcomemessage>
-    <titel>privacyIDEA OTP Adapter - EN</titel>
+    <otptext>OTP Token</otptext>
+    <submittext>Submit</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+    <title>privacyIDEA OTP Adapter - EN</title>
   </interface>
-  <interface LICD="1031"> <!-- DE-DE -->
+
+  <interface LCID="1031"> <!-- DE-DE -->
     <errormessage>Login fehlgeschlagen. Bitte versuchen Sie es erneut!</errormessage>
     <welcomemessage>Bitte geben Sie ihren PIN und OTP Token ein:</welcomemessage>
-    <titel>privacyIDEA OTP Adapter - DE</titel>
+    <otptext>OTP Token</otptext>
+    <submittext>Submit</submittext>
+    <friendlyname>privacyIDEA ADFS Authentikationsprovider</friendlyname>
+    <description>privacyIDEA ADFS Provider zur Bedienung der API.</description>
+    <title>privacyIDEA OTP Adapter - DE</title>
   </interface>
-  <interface LICD="3082"> <!-- SP-SP (int.) -->
+
+  <interface LCID="3082"> <!-- SP-SP (int.) -->
     <errormessage>Inicio de sesión fallido. Por favor intente de nuevo!</errormessage>
     <welcomemessage>Ingrese su PIN y token OTP:</welcomemessage>
-    <titel>privacyIDEA OTP Adapter - ES</titel>
+    <otptext>OTP Token</otptext>
+    <submittext>Submit</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+    <title>privacyIDEA OTP Adapter - ES</title>
   </interface>
-  <interface LICD="1036"> <!-- FR-FR -->
+
+  <interface LCID="1036"> <!-- FR-FR -->
     <errormessage>La connexion a échoué. Veuillez réessayer!</errormessage>
     <welcomemessage>Veuillez entrer votre code PIN et votre jeton OTP:</welcomemessage>
-    <titel>privacyIDEA OTP Adapter - FR</titel>
+    <otptext>OTP Token</otptext>
+    <submittext>Submit</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+    <title>privacyIDEA OTP Adapter - FR</title>
+  </interface>
+
+  <interface LCID="1058"> <!-- uk-UA -->
+    <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
+    <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
+    <otptext>Одноразовий токен</otptext>
+    <submittext>Підтвердити</submittext> 
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+   <title>privacyIDEA OTP Adapter - UA</title>
+  </interface>
+
+  <interface LCID="34"> <!-- uk-UA -->
+    <errormessage>Щось не вийшло. Спробуй знову!</errormessage>
+    <welcomemessage>Вітаю, друже! Введи одноразовий пароль:</welcomemessage>
+    <otptext>Одноразовий токен</otptext>
+    <submittext>Підтвердити</submittext> 
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+   <title>privacyIDEA OTP Adapter - UA</title>
+  </interface>
+
+  <interface LCID="1049"> <!-- ru-RU -->
+    <errormessage>Ошибка входа. Попробуй снова!</errormessage>
+    <welcomemessage>Введи одноразовый пароль:</welcomemessage>
+    <otptext>Одноразовый токен</otptext>
+    <submittext>Подтвердить</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+    <title>privacyIDEA OTP Adapter - RU</title>
+  </interface>
+
+  <interface LCID="25"> <!-- ru-RU -->
+    <errormessage>Ошибка входа. Попробуй снова!</errormessage>
+    <welcomemessage>Введи одноразовый пароль:</welcomemessage>
+    <otptext>Одноразовый токен</otptext>
+    <submittext>Подтвердить</submittext>
+    <friendlyname>privacyIDEA ADFS authentication provider</friendlyname>
+    <description>privacyIDEA ADFS provider to access the api</description>
+    <title>privacyIDEA OTP Adapter - RU</title>
   </interface>
 
 </server>
