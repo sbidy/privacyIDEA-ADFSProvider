@@ -87,6 +87,21 @@ All errors or exceptions from the provider are logged to the Microsoft Windows i
 See in the Applications and Service Logs -> AD FS -> Admin. The source will be registered with the PowerShell installer (1.3.4).
 The EventID is 9901.
 
+## Debug - Don't use this in production!!
+If you have some issues with the provider, you can install a DEBUG version. The Debug Version provides some additional information and messages.
+
+To readout this messages you have to run the [DebugView](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview) from Sysinternals/Microsoft (no installation required).
+
+1. Download the [DebugView.exe](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview)
+2. Run it and configure it
+
+![Debug1](https://github.com/sbidy/privacyIDEA-ADFSProvider/blob/master/Debug_Cap.PNG)
+
+3. Install and run the provider.
+4. Look in the Debug-Output for the following message:
+
+![Debug2](https://github.com/sbidy/privacyIDEA-ADFSProvider/blob/master/Debug_Cap2.PNG)
+
 ## Configuration changes 
 If you change the configuration, you have to reinstall the authentication provider.
 It is not sufficient to restart the service.
