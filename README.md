@@ -1,5 +1,6 @@
 ## [Version 1.3.8.1 (24.05.2020 // Current)](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/tag/1.3.8.1)
   - Added new "ChallengeMessage" feature. The message from the privacyIDEA will be shown in the UI. See #42.
+  
   Note: Please only update to version 1.3.8.1 if you need this new feature!
 
 ## [Version 1.3.7 (30.04.2020)](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/tag/1.3.7)
