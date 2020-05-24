@@ -8,6 +8,7 @@ using System.Text;
 using System.Runtime.Serialization.Json;
 using System.Xml;
 using System.Xml.Linq;
+using System.Collections;
 
 namespace privacyIDEAADFSProvider
 {
@@ -276,6 +277,19 @@ namespace privacyIDEAADFSProvider
             try
             {
                 var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(Encoding.ASCII.GetBytes(jsonResponse), new XmlDictionaryReaderQuotas()));
+                //Console.WriteLine(xml);
+                // return a list if messages node is called
+                if (nodename == "messages")
+                {
+                    string html_message = "";
+                    IEnumerable<XElement> childElements =
+                        from el in xml.Descendants(nodename).Elements()
+                        select el;
+                    foreach (XElement el in childElements)
+                        html_message += el.Value+"<br/>";
+                    return(html_message);
+                }
+
                 return xml.Descendants(nodename).Single().Value;
             }
             catch(Exception ex)

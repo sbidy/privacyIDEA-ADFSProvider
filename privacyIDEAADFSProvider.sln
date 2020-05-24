@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "privacyIDEAADFSProvider", "privacyIDEAADFSProvider\privacyIDEAADFSProvider.csproj", "{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{42F9F1AF-8AB7-4CBA-96E8-88B4B40538AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A9A54D7-F23B-469C-BA61-8C69CBAF50F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42F9F1AF-8AB7-4CBA-96E8-88B4B40538AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F9F1AF-8AB7-4CBA-96E8-88B4B40538AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42F9F1AF-8AB7-4CBA-96E8-88B4B40538AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42F9F1AF-8AB7-4CBA-96E8-88B4B40538AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
