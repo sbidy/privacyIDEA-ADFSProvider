@@ -23,6 +23,10 @@ namespace privacyIDEAADFSProvider
         {
             URL = privacyIDEAurl;
         }
+
+        // Properties
+        public string ChallengeMessage { get; set; }
+
         /// <summary>
         /// Dispatcher methode for #14 - made two request to avoid auth fail by TOTP with PIN
         /// </summary>
@@ -112,6 +116,12 @@ namespace privacyIDEAADFSProvider
                     responseString = Encoding.UTF8.GetString(response);
                     // get transaction id from response
                     string transaction_id = getJsonNode(responseString, "transaction_ids");
+                    // get the message from the challenge
+                    string messages = getJsonNode(responseString, "messages");
+                    if (!string.IsNullOrEmpty(messages))
+                    {
+                        this.ChallengeMessage = messages;
+                    }
                     if (transaction_id.Length > 20) transaction_id = transaction_id.Remove(20);
                     // check if use has challenge token
                     if (getJsonNode(responseString, "value") != "0") this.isChallengeToken = true;

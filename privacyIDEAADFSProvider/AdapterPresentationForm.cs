@@ -7,12 +7,17 @@ namespace privacyIDEAADFSProvider
     {
         public ADFSinterface[] inter;
         private bool error = false;
+        private string _ChallengeMessage;
 
 
-        public AdapterPresentationForm(bool error, ADFSinterface[] adfsinter)
+        public AdapterPresentationForm(bool error, string ChallengeMessage, ADFSinterface[] adfsinter)
         {
             this.error = error;
             this.inter = adfsinter;
+            this._ChallengeMessage = ChallengeMessage;
+#if DEBUG
+            Debug.WriteLine("ID3A_ADFSadapter: Challenge Message: "+ChallengeMessage);
+#endif
         }
 
         /// Returns the HTML Form fragment that contains the adapter user interface. This data will be included in the web page that is presented
@@ -52,6 +57,7 @@ namespace privacyIDEAADFSProvider
                 htmlTemplate = htmlTemplate.Replace("#MESSAGE#", welcomemessage);
                 htmlTemplate = htmlTemplate.Replace("#OTPTEXT#", otptext);
                 htmlTemplate = htmlTemplate.Replace("#SUBMIT#", submittext);
+                htmlTemplate = htmlTemplate.Replace("#C_MESSAGE#", _ChallengeMessage);
             }
             // show the normal logon message
             else
@@ -60,6 +66,7 @@ namespace privacyIDEAADFSProvider
                 htmlTemplate = htmlTemplate.Replace("#ERROR#", "");
                 htmlTemplate = htmlTemplate.Replace("#OTPTEXT#", otptext);
                 htmlTemplate = htmlTemplate.Replace("#SUBMIT#", submittext);
+                htmlTemplate = htmlTemplate.Replace("#C_MESSAGE#", _ChallengeMessage);
             }
             return htmlTemplate;
         }

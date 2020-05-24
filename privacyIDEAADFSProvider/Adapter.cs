@@ -26,7 +26,9 @@ namespace privacyIDEAADFSProvider
         private string token;
         private string admin_user;
         private string admin_pw;
+        private bool show_challenge = false;
         private bool use_upn = false;
+        private string message = "";
         public ADFSinterface[] uidefinition;
         private OTPprovider otp_prov;
 
@@ -94,13 +96,16 @@ namespace privacyIDEAADFSProvider
                 Debug.WriteLine(debugPrefix + " User: " + username + " Realm: " + privacyIDEArealm);
 #endif
                 transaction_id = otp_prov.triggerChallenge(username, privacyIDEArealm, token);
+
             }
             // set vars to context - fix for 14 and 15
             authContext.Data.Add("userid", username);
             authContext.Data.Add("realm", privacyIDEArealm);
             authContext.Data.Add("transaction_id", transaction_id);
+            // defeine if massage will be showen
+            if (show_challenge) message = otp_prov.ChallengeMessage;
 
-            return new AdapterPresentationForm(false, uidefinition);
+            return new AdapterPresentationForm(false, message, uidefinition);
         }
 
         // TODO remove ?
@@ -133,6 +138,7 @@ namespace privacyIDEAADFSProvider
                             admin_user = server_config.adminuser;
                             ssl = server_config.ssl.ToLower() == "false" ? false : true;
                             use_upn = server_config.upn.ToLower() == "false" ? false : true;
+                            show_challenge = server_config.ChallengeMessage.ToLower() == "false" ? false : true;
                             privacyIDEArealm = server_config.realm;
                             privacyIDEAurl = server_config.url;
                             uidefinition = server_config.@interface;
@@ -159,7 +165,7 @@ namespace privacyIDEAADFSProvider
         /// <returns>new instance of IAdapterPresentationForm derived class</returns>
         public IAdapterPresentation OnError(HttpListenerRequest request, ExternalAuthenticationException ex)
         {
-            return new AdapterPresentationForm(true, uidefinition);
+            return new AdapterPresentationForm(true, message, uidefinition);
         }
         /// <summary>
         /// Function call after the user hits submit - it proofs the values (OTP pin)
@@ -185,7 +191,7 @@ namespace privacyIDEAADFSProvider
             else
             {
                 //authentication not complete - return new instance of IAdapterPresentationForm derived class and the generic error message
-                return new AdapterPresentationForm(true, uidefinition);
+                return new AdapterPresentationForm(true, message, uidefinition);
             }
         }
         /// <summary>

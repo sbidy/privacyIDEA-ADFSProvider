@@ -8,6 +8,8 @@
   <ssl>true</ssl>
   <!-- true = use UPN as Loginname Attribute / false = sAMAccountName will be used -->
   <upn>true</upn>
+  <!-- true = show the Challenge Message / false = hides the message -->
+  <ChallengeMessage>true</ChallengeMessage>
   <!-- 
       Provide a administrative user and password for the API.
       Only needed if a challenge must be triggered (e.g. Email or SMS token)!

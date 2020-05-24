@@ -31,6 +31,7 @@ namespace privacyIDEAADFSProvider
         private string adminuserField;
         private string adminpwField;
         private string upnField;
+        private string ChallengeMessageField;
         private ADFSinterface[] interfaceField;
 
         /// <remarks/>
@@ -86,6 +87,20 @@ namespace privacyIDEAADFSProvider
             set
             {
                 this.upnField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string ChallengeMessage
+        {
+            get
+            {
+                return this.ChallengeMessageField;
+            }
+            set
+            {
+                this.ChallengeMessageField = value;
             }
         }
 
@@ -148,6 +163,7 @@ namespace privacyIDEAADFSProvider
         private string descriptionField;
         private int LCIDField;
         private string titleField;
+
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form = System.Xml.Schema.XmlSchemaForm.Unqualified)]

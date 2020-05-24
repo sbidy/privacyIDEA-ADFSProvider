@@ -7,6 +7,7 @@
         <xs:element name="realm" type="xs:string" />
         <xs:element name="ssl" type="xs:boolean" />
         <xs:element name="upn" type="xs:boolean" />
+        <xs:element name="ChallengeMessage" type="xs:boolean" />
         <xs:element name="adminuser" type="xs:string" />
         <xs:element name="adminpw" type="xs:string" />
         <xs:element maxOccurs="unbounded" name="interface" minOccurs="1">
