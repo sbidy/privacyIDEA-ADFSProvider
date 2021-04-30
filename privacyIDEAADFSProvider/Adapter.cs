@@ -59,7 +59,7 @@ namespace privacyIDEAADFSProvider
                 Debug.WriteLine(debugPrefix + " Claim value: " + identityClaim.Value);
 #endif
 
-            string username, domain, upn;
+            string username, domain="", upn="";
             string[] a_identityClaim = identityClaim.Value.Split('\\'); // identityClaim is NETBIOSDOMAIN\sAMAccountName
 
             if (a_identityClaim.Length > 1) 
