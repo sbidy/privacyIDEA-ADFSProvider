@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Microsoft.IdentityServer.Web.Authentication.External;
 using Claim = System.Security.Claims.Claim;
 using System.IO;
@@ -20,8 +20,12 @@ namespace privacyIDEAADFSProvider
         private string version = typeof(Adapter).Assembly.GetName().Version.ToString();
         // TODO: Create a property class
         private string privacyIDEAurl;
-        public string privacyIDEArealm;
+        private string privacyIDEArealm;
+        private string privacyIDEArealmsource;
         string transaction_id = "";
+        
+        private string UserRealm;
+        
         private bool ssl = true;
         private string token;
         private string admin_user;
@@ -54,35 +58,66 @@ namespace privacyIDEAADFSProvider
 #if DEBUG
                 Debug.WriteLine(debugPrefix + " Claim value: " + identityClaim.Value);
 #endif
-            // seperates the username from the domain
-            // TODO: Map the domain to the ID3A realm
-            string username, domain, upn;
-            string[] tmp = identityClaim.Value.Split('\\');
 
-            if (tmp.Length > 1)
+            string username, domain="", upn="";
+            string[] a_identityClaim = identityClaim.Value.Split('\\'); // identityClaim is NETBIOSDOMAIN\sAMAccountName
+
+            if (a_identityClaim.Length > 1) 
             {
-                username = tmp[1];
-                domain = tmp[0];
-                if (use_upn)
-                    // get UPN from sAMAccountName
-                    upn = GetUserPrincipalName(username, domain);
-                else upn = "not configured";
+                username = a_identityClaim[1];
+                domain = a_identityClaim[0];
+
+                if (privacyIDEArealmsource == "NETBIOS")
+                {
+                    UserRealm = a_identityClaim[0];
+                }
+                else {
+                    UserRealm = privacyIDEArealm;
+                }
+
+                // get UPN from sAMAccountName
+                upn = GetUserPrincipalName(username, domain);
+                if (upn.Length > 1)
+                {
+                    // use upn or sam as loginname attribute
+                    if (use_upn)
+                    {
+                        username = upn;
+                    }
+
+                    if (privacyIDEArealmsource == "FQDN")
+                    {
+                    // get FQDN for realm from UPN
+                    string[] a_tmpupn = upn.Split('@');
+
+                        if (a_tmpupn.Length > 1)
+                        {
+                            UserRealm = a_tmpupn[1];
+                        }
+                        else UserRealm = privacyIDEArealm;
+                    }
+                }
+
+                else
+                {
+                    UserRealm = privacyIDEArealm;
+                }
             }
             else
             {
-                username = tmp[0];
-                upn = tmp[0];
-                domain = privacyIDEArealm;
+                username = a_identityClaim[0];
+                UserRealm = privacyIDEArealm;
             }
+
 #if DEBUG
-                Debug.WriteLine(debugPrefix + " UPN value: " + upn + " Domain value: "+domain);
+            Debug.WriteLine(debugPrefix + " UPN value: " + upn + " Domain value: "+domain);
 #endif
             // check if ssl is disabled in the config
             // TODO: Delete for security reasons 
             if (!ssl) ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
 
             // use upn or sam as loginname attribute
-            if (use_upn) username = upn;
+            //if (use_upn) username = upn;
 
                 // trigger challenge
             otp_prov = new OTPprovider(privacyIDEAurl);
@@ -95,12 +130,14 @@ namespace privacyIDEAADFSProvider
 #if DEBUG
                 Debug.WriteLine(debugPrefix + " User: " + username + " Realm: " + privacyIDEArealm);
 #endif
-                transaction_id = otp_prov.triggerChallenge(username, privacyIDEArealm, token);
+                //transaction_id = otp_prov.triggerChallenge(username, privacyIDEArealm, token);
+                transaction_id = otp_prov.triggerChallenge(username, UserRealm, token);
 
             }
             // set vars to context - fix for 14 and 15
             authContext.Data.Add("userid", username);
-            authContext.Data.Add("realm", privacyIDEArealm);
+            //authContext.Data.Add("realm", privacyIDEArealm);
+            authContext.Data.Add("realm", UserRealm);
             authContext.Data.Add("transaction_id", transaction_id);
             // defeine if massage will be showen
             if (show_challenge) message = otp_prov.ChallengeMessage;
@@ -140,6 +177,7 @@ namespace privacyIDEAADFSProvider
                             use_upn = server_config.upn.ToLower() == "false" ? false : true;
                             show_challenge = server_config.ChallengeMessage.ToLower() == "false" ? false : true;
                             privacyIDEArealm = server_config.realm;
+                            privacyIDEArealmsource = server_config.realmsource.ToUpper();
                             privacyIDEAurl = server_config.url;
                             uidefinition = server_config.@interface;
                         }

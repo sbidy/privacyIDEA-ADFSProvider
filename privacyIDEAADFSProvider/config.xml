@@ -1,9 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <server>
   <!-- Server configuration for the privacyIDEA system -->
   <url>https://192.168.0.0</url>
   <!-- define the realm at the privacyIDEA for the ADFS authentication-->
   <realm>users</realm>
+  <!-- realmsource, fallback is always the realm parameter
+       FIXED =   the realm parameter is used 
+       NETBIOS = NetbiosDomain
+       FQDN =    fqdn from userPrincipalName
+  -->
+  <realmsource>FQDN</realmsource>  
   <!-- false = ssl cert check disable / true = ssl cert check enabled (should be used in production environnements) -->
   <ssl>true</ssl>
   <!-- true = use UPN as Loginname Attribute / false = sAMAccountName will be used -->
