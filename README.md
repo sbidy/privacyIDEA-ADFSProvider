@@ -1,3 +1,8 @@
+# Project EOL Anouncment
+This provider will not be furter supported (features) or updaeted.
+
+The project is moved into the offical provide [PrivacyIDEA ADFS-Provider](https://github.com/privacyidea/adfs-provider).
+
 ## [Version 1.3.8.2 (24.05.2020 // Current)](https://github.com/sbidy/privacyIDEA-ADFSProvider/releases/tag/1.3.8.2)
   - Added new "ChallengeMessage" feature. The message from the privacyIDEA will be shown in the UI. See #42.
   
